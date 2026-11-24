@@ -9,25 +9,25 @@ const pad = (n: number, w: number) => String(n).padStart(w, "0");
 interface Airport {
   icao: string;
   name: string;
-  /** Runway headings in tens of degrees, e.g. 3 = runway 03 (heading 030). */
-  runways: number[];
+  /** Runway designators as published, e.g. "03", "14L", "07C". */
+  runways: string[];
   elevation: number;
 }
 
 export const AIRPORTS: Airport[] = [
-  { icao: "LPPT", name: "Lisbon", runways: [2, 20], elevation: 374 },
-  { icao: "LPPR", name: "Porto", runways: [17, 35], elevation: 228 },
-  { icao: "LPFR", name: "Faro", runways: [10, 28], elevation: 24 },
-  { icao: "LPMA", name: "Madeira", runways: [5, 23], elevation: 192 },
-  { icao: "LPAZ", name: "Santa Maria", runways: [18, 36], elevation: 308 },
-  { icao: "LEMD", name: "Madrid Barajas", runways: [14, 18, 32, 36], elevation: 1998 },
-  { icao: "LEBL", name: "Barcelona", runways: [6, 24, 7, 25], elevation: 13 },
-  { icao: "EGLL", name: "Heathrow", runways: [9, 27], elevation: 83 },
-  { icao: "EGKB", name: "Biggin Hill", runways: [3, 21], elevation: 598 },
-  { icao: "LFPG", name: "Charles de Gaulle", runways: [8, 26, 9, 27], elevation: 392 },
-  { icao: "EDDF", name: "Frankfurt", runways: [7, 25, 18], elevation: 364 },
-  { icao: "LIRF", name: "Rome Fiumicino", runways: [16, 34, 7, 25], elevation: 15 },
-  { icao: "OMDB", name: "Dubai", runways: [12, 30], elevation: 62 },
+  { icao: "LPPT", name: "Lisbon", runways: ["03", "21"], elevation: 374 },
+  { icao: "LPPR", name: "Porto", runways: ["17", "35"], elevation: 228 },
+  { icao: "LPFR", name: "Faro", runways: ["10", "28"], elevation: 24 },
+  { icao: "LPMA", name: "Madeira", runways: ["05", "23"], elevation: 192 },
+  { icao: "LPAZ", name: "Santa Maria", runways: ["18", "36"], elevation: 308 },
+  { icao: "LEMD", name: "Madrid Barajas", runways: ["14L", "14R", "18L", "18R", "32L", "32R", "36L", "36R"], elevation: 1998 },
+  { icao: "LEBL", name: "Barcelona", runways: ["06L", "06R", "24L", "24R", "02", "20"], elevation: 13 },
+  { icao: "EGLL", name: "Heathrow", runways: ["09L", "09R", "27L", "27R"], elevation: 83 },
+  { icao: "EGKB", name: "Biggin Hill", runways: ["03", "21"], elevation: 598 },
+  { icao: "LFPG", name: "Charles de Gaulle", runways: ["08L", "08R", "09L", "09R", "26L", "26R", "27L", "27R"], elevation: 392 },
+  { icao: "EDDF", name: "Frankfurt", runways: ["07L", "07C", "07R", "25L", "25C", "25R", "18"], elevation: 364 },
+  { icao: "LIRF", name: "Rome Fiumicino", runways: ["16L", "16R", "34L", "34R", "07", "25"], elevation: 15 },
+  { icao: "OMDB", name: "Dubai", runways: ["12L", "12R", "30L", "30R"], elevation: 62 },
 ];
 
 export interface Cloud {
@@ -53,13 +53,14 @@ export interface Weather {
   trend: "NOSIG" | "BECMG" | "TEMPO";
 }
 
-/** Picks the runway most into the wind. */
-function runwayFor(runways: number[], windDir: number): number {
-  const diff = (rw: number) => {
-    const d = Math.abs(rw * 10 - windDir) % 360;
+/** Picks a runway most into the wind; among parallels with the same heading, one at random. */
+function runwayFor(runways: string[], windDir: number, r: Rand): string {
+  const diff = (rw: string) => {
+    const d = Math.abs(parseInt(rw, 10) * 10 - windDir) % 360;
     return d > 180 ? 360 - d : d;
   };
-  return [...runways].sort((a, b) => diff(a) - diff(b))[0];
+  const best = Math.min(...runways.map(diff));
+  return pick(runways.filter((rw) => diff(rw) === best), r);
 }
 
 export function makeWeather(r: Rand = Math.random): Weather {
@@ -76,16 +77,13 @@ export function makeWeather(r: Rand = Math.random): Weather {
     if (r() < 0.7) clouds.push({ cover: pick(["BKN", "OVC"] as const, r), base: first + int(5, 30, r) * 100 });
   }
   const temp = int(2, 34, r);
-  const rw = runwayFor(airport.runways, windDir);
-  const sameHeading = airport.runways.filter((x) => x === rw).length;
-  const parallel = airport.runways.filter((x) => Math.abs(x - rw) === 1);
-  const side = parallel.length ? (parallel[0] > rw ? "L" : "R") : "";
+  const runway = runwayFor(airport.runways, windDir, r);
   return {
     airport,
     info: pick(Object.keys(NATO), r),
     time: `${pad(int(0, 23, r), 2)}${pick(["20", "50"], r)}`,
     day: int(1, 28, r),
-    runway: `${pad(rw, 2)}${sameHeading && side ? side : ""}`,
+    runway,
     windDir,
     windSpeed,
     gust,

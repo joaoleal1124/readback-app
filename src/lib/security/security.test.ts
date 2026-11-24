@@ -64,7 +64,7 @@ describe("validateResult", () => {
     });
   });
   it("rejects more errors than the simulation has steps", () => {
-    expect(validateResult({ simId: "cascais-local", level: 1, errors: 14 }).ok).toBe(false);
+    expect(validateResult({ simId: "cascais-local", level: 1, errors: 100 }).ok).toBe(false);
   });
   it("rejects bad input", () => {
     expect(validateResult(null).ok).toBe(false);

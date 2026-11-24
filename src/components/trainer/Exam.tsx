@@ -14,8 +14,9 @@ import {
   type ExamItem,
   type ExamRecord,
 } from "@/lib/engine/exam";
-import { checkAnswer, fillCallsign } from "@/lib/engine/normalize";
-import { isQuiz, type Licence, type Simulation } from "@/lib/engine/types";
+import { fillCallsign } from "@/lib/engine/normalize";
+import { choiceOptions, gradeStep, referenceOf } from "@/lib/engine/grade";
+import { isCall, isQuiz, type Licence, type Simulation } from "@/lib/engine/types";
 import { useI18n } from "@/lib/i18n/provider";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import type { useAtcVoice } from "./useAtcVoice";
@@ -128,16 +129,17 @@ export default function Exam(props: {
   const item = run?.items[run.index];
   const cs = run?.callsign ?? "";
   const quiz = item ? isQuiz(item.step) : false;
-  const reference = item ? fillCallsign(isQuiz(item.step) ? item.step.answer : item.step.readback, cs) : "";
+  const call = item ? isCall(item.step) : false;
+  const choice = run?.mode === "choose" || quiz;
   const options = useMemo(
-    () => (item ? shuffle([reference, ...item.step.wrong.map((w) => fillCallsign(w, cs))]) : []),
+    () => (item ? shuffle(choiceOptions(item.step, cs)) : []),
     // a new order per question only
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [item?.step.id, cs],
   );
 
   const play = () => {
-    if (item && !isQuiz(item.step)) voice.speak(fillCallsign(item.step.atc, cs), props.accentFor(item.sim), false);
+    if (item && !isQuiz(item.step) && !isCall(item.step)) voice.speak(fillCallsign(item.step.atc, cs), props.accentFor(item.sim), false);
   };
 
   useEffect(() => {
@@ -152,7 +154,7 @@ export default function Exam(props: {
 
   const submit = (given: string) => {
     if (!run || !item || !given.trim()) return;
-    const ok = run.mode === "choose" ? given === reference : checkAnswer(given, item.step.keys, cs).ok;
+    const ok = choice ? given === referenceOf(item.step, cs) : gradeStep(item.step, given, cs).ok;
     const answers = [...run.answers, { item, given, ok }];
     setAnswer("");
     if (run.index === run.items.length - 1) finish(run, answers);
@@ -184,6 +186,13 @@ export default function Exam(props: {
         <div className="card">
           {isQuiz(item.step) ? (
             <p className="q">{item.step.q_pt}</p>
+          ) : isCall(item.step) ? (
+            <>
+              <p className="ctx">
+                <b>{item.step.phase}.</b> {fillCallsign(item.step.context_pt, cs)}
+              </p>
+              <p className="q">{fillCallsign(item.step.task_pt, cs)}</p>
+            </>
           ) : (
             <>
               <p className="ctx">
@@ -200,9 +209,9 @@ export default function Exam(props: {
         </div>
         <div className="card">
           <label className="lbl" htmlFor="exam-answer">
-            {quiz ? t.yourAnswer : t.yourReadback}
+            {quiz ? t.yourAnswer : call ? t.yourCall : t.yourReadback}
           </label>
-          {run.mode === "choose" ? (
+          {choice ? (
             <div className="opts">
               {options.map((o) => (
                 <button key={o} className="opt" onClick={() => submit(o)}>
@@ -223,7 +232,7 @@ export default function Exam(props: {
                     submit(answer);
                   }
                 }}
-                placeholder={quiz ? t.phQuiz : t.phWrite}
+                placeholder={call ? t.phCall : t.phWrite}
                 autoComplete="off"
                 autoCapitalize="off"
                 spellCheck={false}
@@ -283,6 +292,8 @@ export default function Exam(props: {
                 </div>
                 {isQuiz(a.item.step) ? (
                   <p className="q">{a.item.step.q_pt}</p>
+                ) : isCall(a.item.step) ? (
+                  <p className="q">{fillCallsign(a.item.step.task_pt, result.callsign)}</p>
                 ) : (
                   <p className="msg">
                     {t.atc}: {fillCallsign(a.item.step.atc, result.callsign)}
@@ -292,7 +303,7 @@ export default function Exam(props: {
                   {t.examYours}: {a.given || "—"}
                 </p>
                 <p className="msg">
-                  {t.answer}: {fillCallsign(isQuiz(a.item.step) ? a.item.step.answer : a.item.step.readback, result.callsign)}
+                  {t.answer}: {referenceOf(a.item.step, result.callsign)}
                 </p>
                 <p className="note">{a.item.step.note_pt}</p>
               </article>

@@ -27,6 +27,10 @@ function altitude(value: string): string {
 
 export function toSpeech(text: string): string {
   return text
+    // 25 kHz channels ending in two zeros: only the first four digits (Annex 10 Vol II, 5.2.1.7.3.4.3)
+    .replace(/\b(1[1-3]\d)\.(\d)00\b/g, "$1.$2")
+    // US altimeter settings: "two niner niner two", no "decimal" (FAA JO 7110.65, 2-7-1)
+    .replace(/\baltimeter (\d\d)\.(\d\d)\b/g, "altimeter $1$2")
     .replace(/\b(\d{4,5})(?=\s+feet)/g, (_, n: string) => altitude(n))
     .replace(/\b(maintain|climb|descend|altitude) (\d{4,5})\b/g, (m, w: string, n: string) =>
       Number(n) % 100 === 0 ? `${w} ${altitude(n)}` : m,

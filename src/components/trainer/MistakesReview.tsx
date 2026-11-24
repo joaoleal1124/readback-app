@@ -1,9 +1,11 @@
 "use client";
 import { useMemo, useRef, useState } from "react";
 import { newCallsign } from "@/lib/engine/callsign";
-import { checkAnswer, fillCallsign } from "@/lib/engine/normalize";
+import { fillCallsign } from "@/lib/engine/normalize";
+import { choiceOptions, gradeStep, referenceOf, stableShuffle, type Grade } from "@/lib/engine/grade";
 import { LAST_BOX, dayKey, dueCards, type Deck } from "@/lib/engine/srs";
-import { isQuiz, type Simulation, type Step } from "@/lib/engine/types";
+import { isCall, isQuiz, type Simulation, type Step } from "@/lib/engine/types";
+import AnswerDetail from "./AnswerDetail";
 import { useI18n } from "@/lib/i18n/provider";
 import type { useAtcVoice } from "./useAtcVoice";
 
@@ -34,7 +36,7 @@ export default function MistakesReview(props: {
   const [answer, setAnswer] = useState("");
   const [tried, setTried] = useState(false);
   const [solved, setSolved] = useState(false);
-  const [fb, setFb] = useState<{ ok: boolean; missing?: string[]; revealed?: boolean } | null>(null);
+  const [fb, setFb] = useState<(Partial<Grade> & { ok: boolean; revealed?: boolean }) | null>(null);
   const [showText, setShowText] = useState(false);
   const nextRef = useRef<HTMLButtonElement>(null);
 
@@ -88,12 +90,15 @@ export default function MistakesReview(props: {
 
   const { sim, step } = found;
   const card = deck[step.id];
-  const reference = fillCallsign(isQuiz(step) ? step.answer : step.readback, cs);
+  const reference = referenceOf(step, cs);
+  const quiz = isQuiz(step);
+  const call = isCall(step);
+  const options = stableShuffle(choiceOptions(step, cs), step.id);
 
-  const check = () => {
-    if (solved || !answer.trim()) return;
-    const r = checkAnswer(answer, step.keys, cs);
-    setFb({ ok: r.ok, missing: r.results.filter((x) => !x.ok).map((x) => x.label) });
+  const check = (given = answer) => {
+    if (solved || !given.trim()) return;
+    const r = quiz ? { ok: given === reference } : gradeStep(step, given, cs);
+    setFb(r);
     if (r.ok) {
       setSolved(true);
       setShowText(true);
@@ -125,8 +130,13 @@ export default function MistakesReview(props: {
         {t.yourCallsign}: <b>{cs}</b>
       </p>
       <div className="card">
-        {isQuiz(step) ? (
+        {quiz ? (
           <p className="q">{step.q_pt}</p>
+        ) : call ? (
+          <>
+            <p className="ctx">{fillCallsign(step.context_pt, cs)}</p>
+            <p className="q">{fillCallsign(step.task_pt, cs)}</p>
+          </>
         ) : (
           <>
             <p className="ctx">{step.context_pt}</p>
@@ -148,8 +158,17 @@ export default function MistakesReview(props: {
       </div>
       <div className="card">
         <label className="lbl" htmlFor="srs-answer">
-          {isQuiz(step) ? t.yourAnswer : t.yourReadback}
+          {quiz ? t.yourAnswer : call ? t.yourCall : t.yourReadback}
         </label>
+        {quiz ? (
+          <div className="opts">
+            {options.map((o) => (
+              <button key={o} className={`opt ${solved && o === reference ? "right" : ""}`} disabled={solved} onClick={() => check(o)}>
+                {o}
+              </button>
+            ))}
+          </div>
+        ) : (
         <textarea
           id="srs-answer"
           value={answer}
@@ -161,16 +180,19 @@ export default function MistakesReview(props: {
               else check();
             }
           }}
-          placeholder={isQuiz(step) ? t.phQuiz : t.phWrite}
+          placeholder={call ? t.phCall : t.phWrite}
           autoComplete="off"
           autoCapitalize="off"
           spellCheck={false}
           readOnly={solved}
         />
+        )}
         <div className="row">
-          <button className="btn primary" onClick={check} disabled={solved}>
-            {t.check}
-          </button>
+          {!quiz && (
+            <button className="btn primary" onClick={() => check()} disabled={solved}>
+              {t.check}
+            </button>
+          )}
           <button className="btn" ref={nextRef} onClick={next} disabled={!solved}>
             {t.next}
           </button>
@@ -181,15 +203,7 @@ export default function MistakesReview(props: {
           <div className={`score ${fb.ok ? "ok" : "bad"}`}>
             {fb.ok ? (tried ? t.srsAgainTomorrow : t.srsMovedUp) : t.notYet}
           </div>
-          {!fb.ok && !isQuiz(step) && fb.missing && fb.missing.length > 0 && (
-            <ul className="chips">
-              {fb.missing.map((m) => (
-                <li key={m} className="n">
-                  ✗ {m}
-                </li>
-              ))}
-            </ul>
-          )}
+          {!fb.ok && !quiz && <AnswerDetail feedback={fb} />}
           {!fb.ok && !fb.revealed && (
             <div className="row">
               <button className="btn" onClick={() => setFb({ ...fb, revealed: true })}>

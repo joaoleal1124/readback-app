@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import sims from "@/server/content/sims.json";
-import { checkAnswer, fillCallsign, normalize } from "./normalize";
+import { fillCallsign, normalize } from "./normalize";
+import { choiceOptions, correctVersions, gradeStep, referenceOf } from "./grade";
 import { toSpeech } from "./speech";
 import { newCallsign } from "./callsign";
 import { isQuiz, type Simulation } from "./types";
@@ -54,18 +55,31 @@ describe("every simulation step", () => {
   for (const sim of SIMS) {
     const cs = newCallsign(sim.level, () => 0.5);
     for (const step of sim.steps) {
-      const answer = fillCallsign(isQuiz(step) ? step.answer : step.readback, cs);
-      it(`${step.id}: accepts the reference answer`, () => {
-        expect(checkAnswer(answer, step.keys, cs).ok).toBe(true);
-      });
-      if (!isQuiz(step) || step.answer.includes("{CS}")) {
-        it(`${step.id}: accepts the reference answer said out loud`, () => {
-          expect(checkAnswer(toSpeech(answer).replace(/,/g, ""), step.keys, cs).ok).toBe(true);
+      if (isQuiz(step)) {
+        it(`${step.id}: has one answer and three different wrong options`, () => {
+          expect(new Set([step.answer, ...step.wrong]).size).toBe(4);
+        });
+        continue;
+      }
+      for (const version of correctVersions(step)) {
+        const answer = fillCallsign(version, cs);
+        it(`${step.id}: accepts "${version}"`, () => {
+          expect(gradeStep(step, answer, cs).ok).toBe(true);
+        });
+        it(`${step.id}: accepts "${version}" said out loud`, () => {
+          expect(gradeStep(step, toSpeech(answer).replace(/,/g, ""), cs).ok).toBe(true);
         });
       }
-      it(`${step.id}: rejects every wrong option`, () => {
-        for (const w of step.wrong) expect(checkAnswer(fillCallsign(w, cs), step.keys, cs).ok).toBe(false);
+      it(`${step.id}: offers three wrong options, all rejected`, () => {
+        const [right, ...wrong] = choiceOptions(step, cs);
+        expect(right).toBe(referenceOf(step, cs));
+        expect(wrong).toHaveLength(3);
+        for (const w of wrong) expect(gradeStep(step, w, cs).ok).toBe(false);
       });
+      for (const w of step.wrong ?? [])
+        it(`${step.id}: rejects the written wrong option "${w}"`, () => {
+          expect(gradeStep(step, fillCallsign(w, cs), cs).ok).toBe(false);
+        });
     }
   }
 });

@@ -27,7 +27,9 @@ const BREAK = "|";
 
 export function normalize(input: string): string {
   let s = ` ${input.toLowerCase()} `;
-  s = s.replace(/take[\s-]?off/g, "takeoff").replace(/x-ray/g, "xray").replace(/-/g, "");
+  s = s.replace(/take[\s-]?off/g, "takeoff").replace(/x-ray/g, "xray");
+  // registrations stay joined ("cs-ayb"), any other hyphen separates words ("go-around", "right-hand")
+  s = s.replace(/\b([a-z]{1,2})-([a-z0-9]{2,5})\b/g, "$1$2").replace(/-/g, " ");
   s = s.replace(/flight level/g, "fl").replace(/\bfl\s*(\d)/g, "fl $1");
   // keep decimal points between digits, turn clause punctuation into breaks, drop the rest
   s = s
