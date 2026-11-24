@@ -17,7 +17,13 @@ function readBest(): number {
 type Fb = { ok: boolean; figures?: boolean; revealed?: boolean };
 
 /** NATO alphabet and ICAO numbers: 12 quick rounds, you only move on with the right answer. */
-export default function AlphabetGame({ voice }: { voice: ReturnType<typeof useAtcVoice> }) {
+export default function AlphabetGame({
+  voice,
+  onDone,
+}: {
+  voice: ReturnType<typeof useAtcVoice>;
+  onDone?: (rightFirstTime: number) => void;
+}) {
   const { t } = useI18n();
   const [items, setItems] = useState<DrillItem[]>(() => makeSession());
   const [i, setI] = useState(0);
@@ -82,6 +88,7 @@ export default function AlphabetGame({ voice }: { voice: ReturnType<typeof useAt
       return;
     }
     setFinished(true);
+    onDone?.(firstTry);
     setNewBest(firstTry > best);
     if (firstTry > best) {
       setBest(firstTry);

@@ -23,7 +23,7 @@ interface Session {
 const newSession = (mode: Mode): Session => ({ mode, weather: makeWeather(), index: 0, firstTry: 0, finished: false });
 
 /** Read a METAR or listen to an ATIS, then answer questions about it. */
-export default function WeatherDrill({ voice }: { voice: ReturnType<typeof useAtcVoice> }) {
+export default function WeatherDrill({ voice, onDone }: { voice: ReturnType<typeof useAtcVoice>; onDone?: () => void }) {
   const { t, lang } = useI18n();
   const [s, setS] = useState<Session>(() => newSession("metar"));
   const [answer, setAnswer] = useState("");
@@ -74,6 +74,7 @@ export default function WeatherDrill({ voice }: { voice: ReturnType<typeof useAt
     if (!solved) return;
     if (s.index < qs.length - 1) setS((x) => ({ ...x, index: x.index + 1 }));
     else {
+      onDone?.();
       setS((x) => ({ ...x, finished: true }));
       setShowText(true);
     }

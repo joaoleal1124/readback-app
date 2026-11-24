@@ -121,3 +121,17 @@ textarea { font: 500 1rem/1.5 var(--f-mono); width: 100%; min-height: 84px; padd
 .exam-history .ok { color: var(--ok); }
 .exam-history .bad { color: var(--bad); }
 .badge { display: inline-block; margin-left: 6px; min-width: 1.3em; padding: 0 5px; border-radius: 99px; background: var(--accent); color: var(--accent-ink); font: 700 .72rem/1.4 var(--f-mono); text-align: center; }
+
+/* streak and achievements */
+.streak-card { flex-direction: row; align-items: center; gap: 16px; }
+.streak-num { font: 700 2.4rem var(--f-display, var(--f-body)); white-space: nowrap; }
+.streak-card .sub { margin: 2px 0 0; }
+.days14 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.days14 span { text-align: center; font: 600 .8rem/2.2 var(--f-mono); border-radius: 8px; border: 1px solid var(--line); color: var(--muted); }
+.days14 span.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.ach { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--panel); display: flex; flex-direction: column; gap: 4px; opacity: .55; }
+.ach.on { opacity: 1; border-color: var(--accent); }
+.ach-icon { font-size: 1.6rem; }
+.ach small { color: var(--muted); line-height: 1.35; }
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 12px; font-weight: 600; box-shadow: 0 6px 24px rgba(0,0,0,.25); max-width: calc(100% - 32px); z-index: 20; }
