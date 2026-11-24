@@ -24,6 +24,11 @@ export default function SiteHeader() {
         </Link>
         <div className="head-actions">
           <LanguageSwitch />
+          {supabase && email && (
+            <Link className="btn" href="/escola">
+              {t.school}
+            </Link>
+          )}
           {supabase &&
             (email ? (
               <form action="/auth/signout" method="post">

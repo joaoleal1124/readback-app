@@ -50,6 +50,19 @@ export function loadExams(): ExamRecord[] {
   }
 }
 
+/** Sends the result to the account (if signed in), so an instructor can follow it. */
+export async function uploadExam(rec: ExamRecord): Promise<void> {
+  try {
+    await fetch("/api/exams", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ licence: rec.licence, right: rec.right, total: rec.total, seconds: rec.seconds }),
+    });
+  } catch {
+    /* offline: the result stays in this browser */
+  }
+}
+
 export function saveExam(rec: ExamRecord): ExamRecord[] {
   const all = [rec, ...loadExams()].slice(0, 50);
   try {
