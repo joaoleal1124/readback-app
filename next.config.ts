@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
+import { buildCsp } from "./src/lib/security/csp";
+
+const csp = buildCsp({
+  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+  isDev: process.env.NODE_ENV === "development",
+});
 
 const securityHeaders = [
+  { key: "Content-Security-Policy", value: csp },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "DENY" },

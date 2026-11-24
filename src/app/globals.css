@@ -96,4 +96,10 @@ textarea { font: 500 1rem/1.5 var(--f-mono); width: 100%; min-height: 84px; padd
 .big-num { font: 700 2.6rem var(--f-display); color: var(--accent); line-height: 1; }
 .banner { font-size: .85rem; background: var(--panel); border: 1px dashed var(--line); border-radius: 8px; padding: 8px 12px; color: var(--muted); margin: 0; }
 .foot { font-size: .8rem; color: var(--muted); }
+.foot p { margin: 0 0 6px; }
+.foot-links { display: flex; gap: 16px; }
+.foot-links a { color: inherit; }
+.legal section { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.legal p { margin: 0; line-height: 1.5; }
+.legal .draft { color: var(--muted); font-style: italic; }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }

@@ -45,16 +45,19 @@ export async function saveResult(current: Progress, simId: string, level: number
     }
     return next;
   }
-  const { data: auth } = await supabase.auth.getUser();
-  if (auth.user) {
-    await supabase.from("progress").upsert({
-      user_id: auth.user.id,
-      sim_id: simId,
-      level,
-      best_errors: result.best,
-      runs: result.runs,
-      updated_at: new Date().toISOString(),
+  // signed in: the server checks the result and keeps the official best score and run count
+  try {
+    const res = await fetch("/api/progress", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ simId, level, errors }),
     });
+    if (res.ok) {
+      const saved = (await res.json()) as LevelResult;
+      return { ...current, [simId]: { ...current[simId], [level]: { best: saved.best, runs: saved.runs } } };
+    }
+  } catch {
+    /* offline: keep the result for this visit */
   }
   return next;
 }
