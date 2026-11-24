@@ -8,9 +8,10 @@ import { useI18n } from "@/lib/i18n/provider";
 import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
 import AlphabetGame from "./AlphabetGame";
+import WeatherDrill from "./WeatherDrill";
 import { useSpeechInput } from "./useSpeechInput";
 
-type View = "home" | "sim" | "review" | "alphabet";
+type View = "home" | "sim" | "review" | "alphabet" | "weather";
 const PREFS_KEY = "readback-prefs";
 
 function readPrefs(): { licence?: Licence; accent?: string } {
@@ -99,6 +100,9 @@ export default function Trainer() {
           <button aria-pressed={view === "alphabet"} onClick={() => setView("alphabet")}>
             {t.alphabet}
           </button>
+          <button aria-pressed={view === "weather"} onClick={() => setView("weather")}>
+            {t.weather}
+          </button>
           <button aria-pressed={view === "review"} onClick={() => setView("review")}>
             {t.review}
           </button>
@@ -135,6 +139,8 @@ export default function Trainer() {
       )}
 
       {view === "alphabet" && <AlphabetGame voice={voice} />}
+
+      {view === "weather" && <WeatherDrill voice={voice} />}
 
       {view === "review" && (
         <Review sims={sims} id={reviewId || sims[0].id} setId={setReviewId} lang={lang} />

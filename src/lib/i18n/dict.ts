@@ -104,6 +104,14 @@ const pt = {
   abcNewBest: "Novo recorde!",
   abcDone: "Ronda concluída",
   abcAgain: "Jogar outra vez",
+  weather: "Meteo",
+  wxMode: "Tipo de treino",
+  wxMetar: "Ler METAR",
+  wxAtis: "Ouvir ATIS",
+  wxMetarIntro: "Lê o METAR e responde. Cada vez que começas há meteorologia nova, de aeroportos reais.",
+  wxAtisIntro: "Ouve o ATIS (podes repetir e abrandar) e responde. Tenta não mostrar o texto.",
+  wxDone: "Meteorologia concluída",
+  wxNew: "Nova meteorologia",
 };
 
 export type Dict = typeof pt;
@@ -210,6 +218,14 @@ const en: Dict = {
   abcNewBest: "New best!",
   abcDone: "Round complete",
   abcAgain: "Play again",
+  weather: "Weather",
+  wxMode: "Drill type",
+  wxMetar: "Read METAR",
+  wxAtis: "Listen to ATIS",
+  wxMetarIntro: "Read the METAR and answer. Each run brings new weather at real airports.",
+  wxAtisIntro: "Listen to the ATIS (repeat and slow it down as needed) and answer. Try not to show the text.",
+  wxDone: "Weather drill complete",
+  wxNew: "New weather",
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };

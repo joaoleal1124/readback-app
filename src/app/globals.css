@@ -109,3 +109,4 @@ textarea { font: 500 1rem/1.5 var(--f-mono); width: 100%; min-height: 84px; padd
 .drill-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .drill-opts .opt { text-align: center; font-size: 1.05rem; padding: 14px 10px; }
 .drill-input { font: 500 1rem var(--f-mono); padding: 12px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
+.metar { font: 600 1.05rem/1.5 var(--f-mono); word-spacing: .2em; overflow-wrap: anywhere; margin: 0; }
