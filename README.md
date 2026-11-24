@@ -27,6 +27,14 @@ Verificações: `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`
 
 ## Servidor de testes (Docker)
 
+Num servidor Ubuntu/Debian acabado de instalar, um só comando instala o Docker, descarrega o código e arranca a app:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/joaoleal1124/readback-app/main/scripts/server-setup.sh | bash
+```
+
+Corre o mesmo comando outra vez para atualizar. À mão, numa máquina que já tenha Docker:
+
 ```bash
 cp .env.example .env         # preencher com os dados do Supabase
 docker compose up -d --build # http://IP-DO-SERVIDOR:3000
