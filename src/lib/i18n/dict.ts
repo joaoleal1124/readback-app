@@ -85,6 +85,25 @@ const pt = {
   footer: "Frequências, pontos e procedimentos são exemplos para estudo, não dados do AIP. Fraseologia baseada em ICAO Doc 4444/9432, SERA, CAP 413 e FAA 7110.65. Não substitui a formação certificada.",
   atc: "ATC",
   pilot: "Piloto",
+  alphabet: "Alfabeto",
+  abcIntro: "12 rondas rápidas de alfabeto NATO e números à maneira ICAO. Escreve sempre em palavras de rádio, por exemplo \"one one eight decimal seven fife\".",
+  abcAsk: {
+    letter: "Qual é a palavra para esta letra?",
+    hear: "Ouve a palavra. Que letra é?",
+    reg: "Soletra esta matrícula",
+    freq: "Diz esta frequência",
+    heading: "Diz este rumo",
+    altitude: "Diz esta altitude",
+    level: "Diz este nível de voo",
+    squawk: "Diz este código transponder",
+  } as Record<string, string>,
+  abcPh: "Escreve em palavras de rádio",
+  abcWords: "Escreve cada letra e cada algarismo por palavras, como dirias na rádio (tree, fife, niner, decimal).",
+  abcHear: "▶ Ouvir a pronúncia",
+  abcBest: (n: number) => `Melhor: ${n}/12`,
+  abcNewBest: "Novo recorde!",
+  abcDone: "Ronda concluída",
+  abcAgain: "Jogar outra vez",
 };
 
 export type Dict = typeof pt;
@@ -172,6 +191,25 @@ const en: Dict = {
   terms: "Terms",
   footer: "Frequencies, waypoints and procedures are study examples, not AIP data. Phraseology based on ICAO Doc 4444/9432, SERA, CAP 413 and FAA 7110.65. Not a substitute for certified training.",
   pilot: "Pilot",
+  alphabet: "Alphabet",
+  abcIntro: "12 quick rounds of the NATO alphabet and ICAO numbers. Always type radio words, for example \"one one eight decimal seven fife\".",
+  abcAsk: {
+    letter: "What is the word for this letter?",
+    hear: "Listen to the word. Which letter is it?",
+    reg: "Spell this registration",
+    freq: "Say this frequency",
+    heading: "Say this heading",
+    altitude: "Say this altitude",
+    level: "Say this flight level",
+    squawk: "Say this transponder code",
+  },
+  abcPh: "Type it in radio words",
+  abcWords: "Spell every letter and figure as a word, as you would on the radio (tree, fife, niner, decimal).",
+  abcHear: "▶ Hear it",
+  abcBest: (n) => `Best: ${n}/12`,
+  abcNewBest: "New best!",
+  abcDone: "Round complete",
+  abcAgain: "Play again",
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };

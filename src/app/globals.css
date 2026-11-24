@@ -103,3 +103,9 @@ textarea { font: 500 1rem/1.5 var(--f-mono); width: 100%; min-height: 84px; padd
 .legal p { margin: 0; line-height: 1.5; }
 .legal .draft { color: var(--muted); font-style: italic; }
 @media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+
+/* alphabet and numbers drill */
+.drill-prompt { font: 700 clamp(2.2rem, 9vw, 3.4rem)/1.1 var(--f-mono); letter-spacing: .04em; margin: 6px 0; }
+.drill-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.drill-opts .opt { text-align: center; font-size: 1.05rem; padding: 14px 10px; }
+.drill-input { font: 500 1rem var(--f-mono); padding: 12px; border-radius: 9px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; }
