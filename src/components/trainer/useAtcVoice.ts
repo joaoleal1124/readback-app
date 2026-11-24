@@ -1,6 +1,7 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { toPhrases } from "@/lib/engine/speech";
+import { VOICE_FLOOR, primeAudio, startNoise, stopNoise, type NoiseLevel } from "./radioNoise";
 
 const vlang = (v: SpeechSynthesisVoice) => (v.lang || "").replace("_", "-").toLowerCase();
 
@@ -28,6 +29,7 @@ export function bestVoice(voices: SpeechSynthesisVoice[], lang: string): SpeechS
 export function useAtcVoice() {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [supported, setSupported] = useState(true);
+  const noise = useRef<NoiseLevel>(0);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.speechSynthesis) {
@@ -51,23 +53,38 @@ export function useAtcVoice() {
       if (!supported) return;
       const synth = window.speechSynthesis;
       synth.cancel();
+      stopNoise(noise.current, false);
       const v = pick(lang);
-      for (const part of toPhrases(text)) {
+      const level = noise.current;
+      if (level) primeAudio();
+      const parts = toPhrases(text);
+      parts.forEach((part, i) => {
         const u = new SpeechSynthesisUtterance(part);
+        u.volume = VOICE_FLOOR[level] + Math.random() * (1 - VOICE_FLOOR[level]);
+        if (level && i === 0) u.onstart = () => startNoise(level);
+        if (level && i === parts.length - 1) {
+          u.onend = () => stopNoise(level);
+          u.onerror = () => stopNoise(level, false);
+        }
         if (v) {
           u.voice = v;
           u.lang = v.lang;
         } else u.lang = "en-GB";
         u.rate = slow ? 0.72 : 0.92;
         synth.speak(u);
-      }
+      });
     },
     [pick, supported],
   );
 
   const stop = useCallback(() => {
     if (supported) window.speechSynthesis.cancel();
+    stopNoise(noise.current, false);
   }, [supported]);
 
-  return { supported, voices, pick, speak, stop, hasVoiceFor: (lang: string) => !voices.length || !!bestVoice(voices, lang) };
+  const setNoise = useCallback((level: NoiseLevel) => {
+    noise.current = level;
+  }, []);
+
+  return { supported, voices, pick, speak, stop, setNoise, hasVoiceFor: (lang: string) => !voices.length || !!bestVoice(voices, lang) };
 }

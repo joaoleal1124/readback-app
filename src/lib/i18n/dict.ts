@@ -112,6 +112,8 @@ const pt = {
   wxAtisIntro: "Ouve o ATIS (podes repetir e abrandar) e responde. Tenta não mostrar o texto.",
   wxDone: "Meteorologia concluída",
   wxNew: "Nova meteorologia",
+  noise: "Ruído de rádio",
+  noiseLevels: ["sem", "leve", "médio", "forte"],
 };
 
 export type Dict = typeof pt;
@@ -226,6 +228,8 @@ const en: Dict = {
   wxAtisIntro: "Listen to the ATIS (repeat and slow it down as needed) and answer. Try not to show the text.",
   wxDone: "Weather drill complete",
   wxNew: "New weather",
+  noise: "Radio noise",
+  noiseLevels: ["off", "light", "medium", "strong"],
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };

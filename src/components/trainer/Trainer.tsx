@@ -8,13 +8,14 @@ import { useI18n } from "@/lib/i18n/provider";
 import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
 import AlphabetGame from "./AlphabetGame";
+import { NOISE_LEVELS, type NoiseLevel } from "./radioNoise";
 import WeatherDrill from "./WeatherDrill";
 import { useSpeechInput } from "./useSpeechInput";
 
 type View = "home" | "sim" | "review" | "alphabet" | "weather";
 const PREFS_KEY = "readback-prefs";
 
-function readPrefs(): { licence?: Licence; accent?: string } {
+function readPrefs(): { licence?: Licence; accent?: string; noise?: NoiseLevel } {
   if (typeof window === "undefined") return {};
   try {
     return JSON.parse(localStorage.getItem(PREFS_KEY) ?? "{}");
@@ -49,6 +50,7 @@ export default function Trainer() {
   // the first render only shows "loading", so reading saved preferences here cannot cause a hydration mismatch
   const [licence, setLicence] = useState<Licence>(() => readPrefs().licence ?? "PPL");
   const [accentPref, setAccentPref] = useState(() => readPrefs().accent ?? "auto");
+  const [noise, setNoise] = useState<NoiseLevel>(() => readPrefs().noise ?? 0);
   const [run, setRun] = useState<Run | null>(null);
   const [reviewId, setReviewId] = useState("");
 
@@ -62,11 +64,13 @@ export default function Trainer() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(PREFS_KEY, JSON.stringify({ licence, accent: accentPref }));
+      localStorage.setItem(PREFS_KEY, JSON.stringify({ licence, accent: accentPref, noise }));
     } catch {}
-  }, [licence, accentPref]);
+  }, [licence, accentPref, noise]);
 
   const voice = useAtcVoice();
+  const { setNoise: setVoiceNoise } = voice;
+  useEffect(() => setVoiceNoise(noise), [noise, setVoiceNoise]);
 
   const start = (sim: Simulation, level: number) => {
     setRun({
@@ -116,6 +120,8 @@ export default function Trainer() {
           setLicence={setLicence}
           accentPref={accentPref}
           setAccentPref={setAccentPref}
+          noise={noise}
+          setNoise={setNoise}
           progress={progress}
           hasVoiceFor={voice.hasVoiceFor}
           onStart={start}
@@ -157,6 +163,8 @@ function Home(props: {
   setLicence: (l: Licence) => void;
   accentPref: string;
   setAccentPref: (a: string) => void;
+  noise: NoiseLevel;
+  setNoise: (n: NoiseLevel) => void;
   progress: Progress;
   hasVoiceFor: (lang: string) => boolean;
   onStart: (s: Simulation, level: number) => void;
@@ -192,6 +200,18 @@ function Home(props: {
               </option>
             );
           })}
+        </select>
+        <select
+          id="noise"
+          aria-label={t.noise}
+          value={props.noise}
+          onChange={(e) => props.setNoise(Number(e.target.value) as NoiseLevel)}
+        >
+          {NOISE_LEVELS.map((n) => (
+            <option key={n} value={n}>
+              {t.noise}: {t.noiseLevels[n]}
+            </option>
+          ))}
         </select>
       </div>
       <p className="sub">{t.levelsIntro}</p>
