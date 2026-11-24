@@ -25,6 +25,7 @@ export interface QuizStep {
   id: string;
   phase: string;
   q_pt: string;
+  /** May contain {CS} when the question asks for a whole radio call. */
   answer: string;
   keys: string[];
   wrong: string[];

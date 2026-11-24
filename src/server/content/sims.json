@@ -1731,5 +1731,377 @@
     "id": "dubai-arr-06"
    }
   ]
+ },
+ {
+  "id": "emerg-engine-cascais",
+  "level": "PPL",
+  "title": "Emergência: falha de motor",
+  "place": "Norte de Cascais (LPCS), Portugal",
+  "accent": "pt-PT",
+  "accent_pt": "Português",
+  "summary_pt": "Motor parado em voo local: chamada MAYDAY, squawk 7700, escolha de campo e cancelamento da emergência.",
+  "steps": [
+   {
+    "type": "quiz",
+    "phase": "Teoria",
+    "q_pt": "Que palavra repetes três vezes no início de uma chamada de socorro (perigo grave e iminente)?",
+    "answer": "MAYDAY",
+    "keys": [
+     "mayday"
+    ],
+    "wrong": [
+     "PAN PAN",
+     "SECURITE"
+    ],
+    "note_pt": "MAYDAY é socorro: perigo grave e iminente, precisas de ajuda imediata. PAN PAN é urgência: problema sério sem perigo imediato.",
+    "id": "emerg-engine-cascais-01"
+   },
+   {
+    "type": "quiz",
+    "phase": "Chamada de socorro",
+    "q_pt": "O motor parou a 2500 ft, 5 NM a norte de Cascais, com 2 pessoas a bordo. Estás em contacto com Lisbon Information. Faz a chamada MAYDAY.",
+    "answer": "MAYDAY MAYDAY MAYDAY, Lisbon Information, {CS}, engine failure, forced landing, 5 miles north of Cascais, 2500 feet, 2 persons on board.",
+    "keys": [
+     "mayday mayday mayday",
+     "{CS}",
+     "engine failure",
+     "forced landing",
+     "5 miles north",
+     "2500",
+     "2 persons"
+    ],
+    "wrong": [
+     "PAN PAN, PAN PAN, PAN PAN, Lisbon Information, {CS}, engine failure, forced landing, 5 miles north of Cascais, 2500 feet, 2 persons on board.",
+     "MAYDAY, {CS}, engine failure."
+    ],
+    "note_pt": "Ordem da chamada: MAYDAY ×3, estação, indicativo, natureza da emergência, intenções, posição, altitude e pessoas a bordo (e o rumo, se ajudar). Usa a frequência em que já estás.",
+    "id": "emerg-engine-cascais-02"
+   },
+   {
+    "phase": "Emergência",
+    "station": "Lisbon Information",
+    "freq": "123.755",
+    "context_pt": "Lisbon Information recebeu a tua chamada.",
+    "atc": "{CS}, Lisbon Information, roger MAYDAY, squawk 7700, report landing site.",
+    "atc_pt": "{CS}, Lisbon Information, MAYDAY recebido, squawk 7700, informe o local de aterragem.",
+    "readback": "Squawk 7700, wilco, {CS}.",
+    "readback_pt": "Squawk 7700, wilco, {CS}.",
+    "keys": [
+     "7700",
+     "{CS}"
+    ],
+    "wrong": [
+     "Squawk 7600, wilco, {CS}.",
+     "Squawk 7000, {CS}."
+    ],
+    "note_pt": "O código 7700 alerta todos os radares para a emergência. Colaciona sempre o código transponder.",
+    "id": "emerg-engine-cascais-03"
+   },
+   {
+    "phase": "Emergência",
+    "station": "Lisbon Information",
+    "freq": "123.755",
+    "context_pt": "O ATC dá-te informação sobre o aeródromo mais próximo.",
+    "atc": "{CS}, Cascais aerodrome 4 miles south of you, runway 35, wind 330 degrees 8 knots, QNH 1016.",
+    "atc_pt": "{CS}, aeródromo de Cascais 4 milhas a sul, pista 35, vento 330 graus 8 nós, QNH 1016.",
+    "readback": "Runway 35, QNH 1016, {CS}.",
+    "readback_pt": "Pista 35, QNH 1016, {CS}.",
+    "keys": [
+     "35",
+     "1016",
+     "{CS}"
+    ],
+    "wrong": [
+     "Runway 35, {CS}.",
+     "Runway 33, QNH 1016, {CS}."
+    ],
+    "note_pt": "Pista e QNH colacionam-se sempre, mesmo em emergência.",
+    "id": "emerg-engine-cascais-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Depois de aterrar",
+    "q_pt": "Aterraste em segurança. Como cancelas a emergência?",
+    "answer": "{CS}, cancel MAYDAY, landed safely.",
+    "keys": [
+     "cancel mayday|cancel distress",
+     "{CS}"
+    ],
+    "wrong": [
+     "{CS}, MAYDAY finished.",
+     "{CS}, on ground."
+    ],
+    "note_pt": "Quando o perigo acaba, cancela sempre a emergência para libertar os meios de socorro e a frequência.",
+    "id": "emerg-engine-cascais-05"
+   },
+   {
+    "type": "quiz",
+    "phase": "Teoria",
+    "q_pt": "Que código transponder indica emergência?",
+    "answer": "7700",
+    "keys": [
+     "7700"
+    ],
+    "wrong": [
+     "7600",
+     "7500"
+    ],
+    "note_pt": "7700 emergência, 7600 falha de rádio, 7500 interferência ilícita.",
+    "id": "emerg-engine-cascais-06"
+   }
+  ]
+ },
+ {
+  "id": "emerg-radio-biggin",
+  "level": "PPL",
+  "title": "Emergência: falha de rádio",
+  "place": "Sul de Londres, Biggin Hill (EGKB), Reino Unido",
+  "accent": "en-GB",
+  "accent_pt": "Britânico",
+  "summary_pt": "O rádio deixa de receber: squawk 7600, chamada às cegas e sinais luminosos da torre.",
+  "steps": [
+   {
+    "phase": "Em rota",
+    "station": "Farnborough Radar",
+    "freq": "125.250",
+    "context_pt": "Estás a voar para Biggin Hill com serviço de tráfego de Farnborough.",
+    "atc": "{CS}, Farnborough Radar, squawk 4672, QNH 1009.",
+    "atc_pt": "{CS}, Farnborough Radar, squawk 4672, QNH 1009.",
+    "readback": "Squawk 4672, QNH 1009, {CS}.",
+    "readback_pt": "Squawk 4672, QNH 1009, {CS}.",
+    "keys": [
+     "4672",
+     "1009",
+     "{CS}"
+    ],
+    "wrong": [
+     "Squawk 4762, QNH 1009, {CS}.",
+     "QNH 1009, {CS}."
+    ],
+    "note_pt": "Código transponder e QNH colacionam-se sempre.",
+    "id": "emerg-radio-biggin-01"
+   },
+   {
+    "type": "quiz",
+    "phase": "Falha de rádio",
+    "q_pt": "O rádio deixou de receber. Que código transponder selecionas?",
+    "answer": "7600",
+    "keys": [
+     "7600"
+    ],
+    "wrong": [
+     "7700",
+     "7500"
+    ],
+    "note_pt": "7600 avisa o controlo de que tens falha de comunicações.",
+    "id": "emerg-radio-biggin-02"
+   },
+   {
+    "type": "quiz",
+    "phase": "Falha de rádio",
+    "q_pt": "Achas que o transmissor ainda funciona. Com que expressão começas uma chamada que não sabes se é ouvida?",
+    "answer": "Transmitting blind",
+    "keys": [
+     "transmitting blind"
+    ],
+    "wrong": [
+     "Radio check",
+     "Say again"
+    ],
+    "note_pt": "Transmitting blind: transmites sem receber resposta, duas vezes, para quem estiver à escuta.",
+    "id": "emerg-radio-biggin-03"
+   },
+   {
+    "type": "quiz",
+    "phase": "Chamada às cegas",
+    "q_pt": "Faz a chamada às cegas para Farnborough Radar: falha de receção, 2000 ft, a seguir para Biggin Hill para aterrar na pista 21.",
+    "answer": "Transmitting blind, Farnborough Radar, {CS}, radio receiver failure, 2000 feet, proceeding to Biggin Hill, landing runway 21.",
+    "keys": [
+     "transmitting blind",
+     "{CS}",
+     "2000",
+     "biggin hill",
+     "21"
+    ],
+    "wrong": [
+     "Farnborough Radar, {CS}, radio check.",
+     "MAYDAY MAYDAY MAYDAY, {CS}, radio failure."
+    ],
+    "note_pt": "Diz o que vais fazer, para que o controlo possa afastar o outro tráfego. Repete a chamada uma vez.",
+    "id": "emerg-radio-biggin-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Sinais luminosos",
+    "q_pt": "No circuito, a torre aponta-te uma luz verde contínua. O que significa para um avião em voo?",
+    "answer": "Cleared to land",
+    "keys": [
+     "cleared to land"
+    ],
+    "wrong": [
+     "Return for landing",
+     "Give way to other aircraft and continue circling"
+    ],
+    "note_pt": "Em voo: verde contínuo, autorizado a aterrar. Verde intermitente, regressa para aterrar.",
+    "id": "emerg-radio-biggin-05"
+   },
+   {
+    "type": "quiz",
+    "phase": "Sinais luminosos",
+    "q_pt": "E uma luz vermelha contínua?",
+    "answer": "Give way to other aircraft and continue circling",
+    "keys": [
+     "give way",
+     "continue circling"
+    ],
+    "wrong": [
+     "Cleared to land",
+     "Aerodrome unsafe, do not land"
+    ],
+    "note_pt": "Em voo: vermelho contínuo, dá prioridade e continua a circular. Vermelho intermitente, aeródromo inseguro, não aterres.",
+    "id": "emerg-radio-biggin-06"
+   }
+  ]
+ },
+ {
+  "id": "emerg-madrid-panpan",
+  "level": "ATPL",
+  "title": "Emergência: PAN PAN e MAYDAY",
+  "place": "Aproximação a Madrid (LEMD), Espanha",
+  "accent": "es-ES",
+  "accent_pt": "Espanhol",
+  "summary_pt": "Passageiro doente (PAN PAN) que passa a fumo na cabine (MAYDAY): descida, rumo direto, 7700 e mudança de frequência.",
+  "steps": [
+   {
+    "type": "quiz",
+    "phase": "Urgência",
+    "q_pt": "Um passageiro tem dores no peito. Estás em FL360, 80 NM a norte de Madrid. Pede prioridade a Madrid Control com uma chamada PAN PAN.",
+    "answer": "PAN PAN, PAN PAN, PAN PAN, Madrid Control, {CS}, medical emergency on board, request priority landing at Madrid, FL360, 80 miles north of Madrid.",
+    "keys": [
+     "pan pan pan pan pan pan",
+     "{CS}",
+     "medical",
+     "priority"
+    ],
+    "wrong": [
+     "MAYDAY MAYDAY MAYDAY, Madrid Control, {CS}, medical emergency on board, request priority landing at Madrid.",
+     "Madrid Control, {CS}, request direct Madrid."
+    ],
+    "note_pt": "PAN PAN repete-se três vezes. É urgência: precisas de prioridade, mas não há perigo imediato para o avião.",
+    "id": "emerg-madrid-panpan-01"
+   },
+   {
+    "phase": "Urgência",
+    "station": "Madrid Control",
+    "freq": "132.950",
+    "context_pt": "O controlo responde à tua chamada PAN PAN.",
+    "atc": "{CS}, Madrid Control, roger PAN, descend FL240, turn right heading 190.",
+    "atc_pt": "{CS}, Madrid Control, PAN recebido, desça para FL240, volte à direita rumo 190.",
+    "readback": "Descend FL240, right heading 190, {CS}.",
+    "readback_pt": "Descer para FL240, direita rumo 190, {CS}.",
+    "keys": [
+     "fl 240",
+     "right heading 190",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descend FL250, right heading 190, {CS}.",
+     "Descend FL240, left heading 190, {CS}."
+    ],
+    "note_pt": "Nível, sentido da volta e rumo colacionam-se sempre.",
+    "id": "emerg-madrid-panpan-02"
+   },
+   {
+    "type": "quiz",
+    "phase": "Teoria",
+    "q_pt": "Aparece fumo na cabine. Como muda a tua chamada?",
+    "answer": "Upgrade to MAYDAY",
+    "keys": [
+     "mayday"
+    ],
+    "wrong": [
+     "Keep PAN PAN",
+     "Squawk 7500"
+    ],
+    "note_pt": "Se a situação passa a perigo grave e iminente, sobes de PAN PAN para MAYDAY.",
+    "id": "emerg-madrid-panpan-03"
+   },
+   {
+    "type": "quiz",
+    "phase": "Socorro",
+    "q_pt": "Faz a chamada MAYDAY: fumo na cabine, a descer para FL100, pedes rumo direto a Madrid, 156 pessoas a bordo.",
+    "answer": "MAYDAY MAYDAY MAYDAY, Madrid Control, {CS}, smoke in the cabin, descending FL100, request direct Madrid, 156 persons on board.",
+    "keys": [
+     "mayday mayday mayday",
+     "{CS}",
+     "smoke",
+     "fl 100",
+     "156"
+    ],
+    "wrong": [
+     "PAN PAN, PAN PAN, PAN PAN, Madrid Control, {CS}, smoke in the cabin, descending FL100.",
+     "Madrid Control, {CS}, smoke, descending."
+    ],
+    "note_pt": "Natureza da emergência, intenções e pessoas a bordo. O controlo trata do resto.",
+    "id": "emerg-madrid-panpan-04"
+   },
+   {
+    "phase": "Socorro",
+    "station": "Madrid Control",
+    "freq": "132.950",
+    "context_pt": "O controlo coordena a tua chegada a Madrid.",
+    "atc": "{CS}, Madrid Control, roger MAYDAY, cleared direct Madrid, descend FL100, squawk 7700.",
+    "atc_pt": "{CS}, Madrid Control, MAYDAY recebido, autorizado direto Madrid, desça para FL100, squawk 7700.",
+    "readback": "Direct Madrid, descend FL100, squawk 7700, {CS}.",
+    "readback_pt": "Direto Madrid, descer para FL100, squawk 7700, {CS}.",
+    "keys": [
+     "direct madrid",
+     "fl 100",
+     "7700",
+     "{CS}"
+    ],
+    "wrong": [
+     "Direct Madrid, descend FL110, squawk 7700, {CS}.",
+     "Direct Madrid, descend FL100, {CS}."
+    ],
+    "note_pt": "Mesmo em emergência, colaciona rota, nível e código.",
+    "id": "emerg-madrid-panpan-05"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Madrid Control",
+    "freq": "132.950",
+    "context_pt": "Passas para a aproximação.",
+    "atc": "{CS}, contact Madrid Approach 127.1, they are aware of your emergency.",
+    "atc_pt": "{CS}, contacte Madrid Aproximação 127.1, já sabem da sua emergência.",
+    "readback": "Madrid Approach 127.1, {CS}.",
+    "readback_pt": "Madrid Aproximação 127.1, {CS}.",
+    "keys": [
+     "127.1",
+     "{CS}"
+    ],
+    "wrong": [
+     "Madrid Approach 127.7, {CS}.",
+     "Roger, {CS}."
+    ],
+    "note_pt": "Colaciona sempre a frequência nova.",
+    "id": "emerg-madrid-panpan-06"
+   },
+   {
+    "type": "quiz",
+    "phase": "Teoria",
+    "q_pt": "Que código transponder indica interferência ilícita (sequestro)?",
+    "answer": "7500",
+    "keys": [
+     "7500"
+    ],
+    "wrong": [
+     "7700",
+     "7600"
+    ],
+    "note_pt": "7500 interferência ilícita, 7600 falha de rádio, 7700 emergência.",
+    "id": "emerg-madrid-panpan-07"
+   }
+  ]
  }
 ]

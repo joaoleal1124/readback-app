@@ -270,7 +270,7 @@ function SimRun(props: {
   const [wrongPicks, setWrongPicks] = useState<string[]>([]);
   const nextRef = useRef<HTMLButtonElement>(null);
 
-  const reference = quiz ? step.answer : fillCallsign(step.readback, cs);
+  const reference = fillCallsign(quiz ? step.answer : step.readback, cs);
   const options = useMemo(
     () => shuffle([reference, ...step.wrong.map((w) => fillCallsign(w, cs))]),
     // a new order per step only
@@ -636,7 +636,7 @@ function Review({ sims, id, setId }: { sims: Simulation[]; id: string; setId: (i
               <span>#{i + 1}</span>
             </div>
             <p className="q">{st.q_pt}</p>
-            <p className="msg">{st.answer}</p>
+            <p className="msg">{fillCallsign(st.answer, cs)}</p>
             <p className="note">{st.note_pt}</p>
           </article>
         ) : (

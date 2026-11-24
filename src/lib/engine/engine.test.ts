@@ -35,6 +35,14 @@ describe("speech", () => {
   });
 });
 
+describe("emergency phraseology", () => {
+  it("says PAN as a word, never spelled", () => {
+    expect(toSpeech("Air Portugal 409, roger PAN, descend FL240.")).toBe(
+      "Air Portugal four zero niner, roger PAN, descend flight level two four zero.",
+    );
+  });
+});
+
 describe("callsigns", () => {
   it("uses the school callsign for PPL and the airline one for ATPL", () => {
     expect(newCallsign("PPL", () => 0)).toBe("Air Dream College 100");
@@ -46,11 +54,11 @@ describe("every simulation step", () => {
   for (const sim of SIMS) {
     const cs = newCallsign(sim.level, () => 0.5);
     for (const step of sim.steps) {
-      const answer = isQuiz(step) ? step.answer : fillCallsign(step.readback, cs);
+      const answer = fillCallsign(isQuiz(step) ? step.answer : step.readback, cs);
       it(`${step.id}: accepts the reference answer`, () => {
         expect(checkAnswer(answer, step.keys, cs).ok).toBe(true);
       });
-      if (!isQuiz(step)) {
+      if (!isQuiz(step) || step.answer.includes("{CS}")) {
         it(`${step.id}: accepts the reference answer said out loud`, () => {
           expect(checkAnswer(toSpeech(answer).replace(/,/g, ""), step.keys, cs).ok).toBe(true);
         });
