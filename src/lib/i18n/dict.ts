@@ -131,6 +131,15 @@ const pt = {
   examMistakes: "O que falhaste",
   examYours: "A tua resposta",
   examHistory: "Exames anteriores",
+  mistakes: "Erros",
+  srsIntro: "Cada passo que falhas (nas simulações ou no exame) vem para aqui. Se acertares à primeira, volta daqui a 2, 4, 8 e 16 dias, até ficar sabido. Se falhares, volta amanhã.",
+  srsDue: (total: number) => `para rever hoje (${total} no total)`,
+  srsStart: "Rever agora",
+  srsEmpty: "Ainda não tens erros guardados. Faz uma simulação ou um exame.",
+  srsDone: "Revisão concluída",
+  srsBox: (box: number, last: number) => `Caixa ${box} de ${last}`,
+  srsMovedUp: "Certo à primeira: volta mais tarde",
+  srsAgainTomorrow: "Certo, mas volta amanhã",
 };
 
 export type Dict = typeof pt;
@@ -264,6 +273,15 @@ const en: Dict = {
   examMistakes: "What you missed",
   examYours: "Your answer",
   examHistory: "Past exams",
+  mistakes: "Mistakes",
+  srsIntro: "Every step you miss (in simulations or exams) comes here. Right first time and it comes back in 2, 4, 8 and 16 days until it sticks. Miss it and it comes back tomorrow.",
+  srsDue: (total) => `due today (${total} in total)`,
+  srsStart: "Review now",
+  srsEmpty: "No mistakes saved yet. Do a simulation or an exam.",
+  srsDone: "Review complete",
+  srsBox: (box, last) => `Box ${box} of ${last}`,
+  srsMovedUp: "Right first time: see you later",
+  srsAgainTomorrow: "Right, but it comes back tomorrow",
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };
