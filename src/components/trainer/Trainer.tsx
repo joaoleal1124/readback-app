@@ -9,11 +9,13 @@ import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
 import AlphabetGame from "./AlphabetGame";
 import Exam from "./Exam";
+import MistakesReview from "./MistakesReview";
+import { dayKey, dueCards, loadDeck, recordMistake, recordReview, saveDeck, type Deck } from "@/lib/engine/srs";
 import { NOISE_LEVELS, type NoiseLevel } from "./radioNoise";
 import WeatherDrill from "./WeatherDrill";
 import { useSpeechInput } from "./useSpeechInput";
 
-type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam";
+type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam" | "mistakes";
 const PREFS_KEY = "readback-prefs";
 
 function readPrefs(): { licence?: Licence; accent?: string; noise?: NoiseLevel } {
@@ -52,6 +54,12 @@ export default function Trainer() {
   const [licence, setLicence] = useState<Licence>(() => readPrefs().licence ?? "PPL");
   const [accentPref, setAccentPref] = useState(() => readPrefs().accent ?? "auto");
   const [noise, setNoise] = useState<NoiseLevel>(() => readPrefs().noise ?? 0);
+  const [deck, setDeck] = useState<Deck>(loadDeck);
+  const addMistake = useCallback((stepId: string) => setDeck((d) => saveDeck(recordMistake(d, stepId, dayKey(new Date())))), []);
+  const reviewed = useCallback(
+    (stepId: string, ok: boolean) => setDeck((d) => saveDeck(recordReview(d, stepId, ok, dayKey(new Date())))),
+    [],
+  );
   const [run, setRun] = useState<Run | null>(null);
   const [reviewId, setReviewId] = useState("");
 
@@ -94,6 +102,8 @@ export default function Trainer() {
 
   if (loadFailed) return <p className="sub">{t.loadError}</p>;
   if (!sims) return <p className="sub">{t.loading}</p>;
+  // only reached in the browser, after the simulations load
+  const dueCount = dueCards(deck, dayKey(new Date()), 999).length;
 
   return (
     <div className="view">
@@ -110,6 +120,10 @@ export default function Trainer() {
           </button>
           <button aria-pressed={view === "exam"} onClick={() => setView("exam")}>
             {t.exam}
+          </button>
+          <button aria-pressed={view === "mistakes"} onClick={() => setView("mistakes")}>
+            {t.mistakes}
+            {dueCount > 0 && <span className="badge">{dueCount}</span>}
           </button>
           <button aria-pressed={view === "review"} onClick={() => setView("review")}>
             {t.review}
@@ -140,6 +154,7 @@ export default function Trainer() {
           accentLang={accentPref === "auto" ? run.sim.accent : accentPref}
           voice={voice}
           onFinish={finish}
+          onMistake={addMistake}
           onExit={() => {
             voice.stop();
             setView("home");
@@ -156,6 +171,17 @@ export default function Trainer() {
         <Exam
           sims={sims}
           licence={licence}
+          voice={voice}
+          accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
+          onMistake={addMistake}
+        />
+      )}
+
+      {view === "mistakes" && (
+        <MistakesReview
+          sims={sims}
+          deck={deck}
+          onReviewed={reviewed}
           voice={voice}
           accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
         />
@@ -284,6 +310,7 @@ function SimRun(props: {
   accentLang: string;
   voice: ReturnType<typeof useAtcVoice>;
   onFinish: (r: Run) => void;
+  onMistake: (stepId: string) => void;
   onExit: () => void;
   onStart: (s: Simulation, level: number) => void;
 }) {
@@ -341,7 +368,10 @@ function SimRun(props: {
       if (!tried) props.setRun({ ...run, firstTry: run.firstTry + 1 });
       setTimeout(() => nextRef.current?.focus(), 30);
     } else {
-      if (!tried) props.setRun({ ...run, errors: run.errors + 1 });
+      if (!tried) {
+        props.setRun({ ...run, errors: run.errors + 1 });
+        props.onMistake(step.id);
+      }
       setTried(true);
     }
   };
