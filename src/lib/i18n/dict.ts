@@ -114,6 +114,23 @@ const pt = {
   wxNew: "Nova meteorologia",
   noise: "Ruído de rádio",
   noiseLevels: ["sem", "leve", "médio", "forte"],
+  exam: "Exame",
+  examIntro: (n: number, min: number, pass: number) =>
+    `${n} perguntas ao acaso de todas as simulações da tua licença, em ${min} minutos. Só tens uma tentativa por pergunta e não vês o texto do ATC. Passas com ${pass}%.`,
+  examMode: "Tipo de resposta",
+  examWrite: "Escrita",
+  examChoose: "Escolha múltipla",
+  examStart: (lic: string) => `Começar exame ${lic}`,
+  examAgain: "Novo exame",
+  examSubmit: "Responder →",
+  examOneTry: "Uma só tentativa. A nota aparece no fim.",
+  examResult: "Resultado do exame",
+  examPass: "Aprovado",
+  examFail: (pass: number) => `Reprovado (precisas de ${pass}%)`,
+  examRight: (a: number, b: number) => `${a} de ${b} certas`,
+  examMistakes: "O que falhaste",
+  examYours: "A tua resposta",
+  examHistory: "Exames anteriores",
 };
 
 export type Dict = typeof pt;
@@ -230,6 +247,23 @@ const en: Dict = {
   wxNew: "New weather",
   noise: "Radio noise",
   noiseLevels: ["off", "light", "medium", "strong"],
+  exam: "Exam",
+  examIntro: (n, min, pass) =>
+    `${n} random questions from every simulation for your licence, in ${min} minutes. One try per question and no ATC text. Pass mark ${pass}%.`,
+  examMode: "Answer type",
+  examWrite: "Written",
+  examChoose: "Multiple choice",
+  examStart: (lic) => `Start ${lic} exam`,
+  examAgain: "New exam",
+  examSubmit: "Answer →",
+  examOneTry: "One try only. Your mark appears at the end.",
+  examResult: "Exam result",
+  examPass: "Passed",
+  examFail: (pass) => `Failed (you need ${pass}%)`,
+  examRight: (a, b) => `${a} of ${b} right`,
+  examMistakes: "What you missed",
+  examYours: "Your answer",
+  examHistory: "Past exams",
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };

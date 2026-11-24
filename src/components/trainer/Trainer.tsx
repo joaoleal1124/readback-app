@@ -8,11 +8,12 @@ import { useI18n } from "@/lib/i18n/provider";
 import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
 import AlphabetGame from "./AlphabetGame";
+import Exam from "./Exam";
 import { NOISE_LEVELS, type NoiseLevel } from "./radioNoise";
 import WeatherDrill from "./WeatherDrill";
 import { useSpeechInput } from "./useSpeechInput";
 
-type View = "home" | "sim" | "review" | "alphabet" | "weather";
+type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam";
 const PREFS_KEY = "readback-prefs";
 
 function readPrefs(): { licence?: Licence; accent?: string; noise?: NoiseLevel } {
@@ -107,6 +108,9 @@ export default function Trainer() {
           <button aria-pressed={view === "weather"} onClick={() => setView("weather")}>
             {t.weather}
           </button>
+          <button aria-pressed={view === "exam"} onClick={() => setView("exam")}>
+            {t.exam}
+          </button>
           <button aria-pressed={view === "review"} onClick={() => setView("review")}>
             {t.review}
           </button>
@@ -147,6 +151,15 @@ export default function Trainer() {
       {view === "alphabet" && <AlphabetGame voice={voice} />}
 
       {view === "weather" && <WeatherDrill voice={voice} />}
+
+      {view === "exam" && (
+        <Exam
+          sims={sims}
+          licence={licence}
+          voice={voice}
+          accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
+        />
+      )}
 
       {view === "review" && (
         <Review sims={sims} id={reviewId || sims[0].id} setId={setReviewId} lang={lang} />
