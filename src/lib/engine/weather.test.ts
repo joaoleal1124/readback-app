@@ -4,11 +4,11 @@ import { toSpeech } from "./speech";
 import { atisQuestions, cleanWeatherAnswer, makeWeather, metarQuestions, toAtis, toMetar, type Weather } from "./weather";
 
 const LPPT: Weather = {
-  airport: { icao: "LPPT", name: "Lisbon", runways: [2, 20], elevation: 374 },
+  airport: { icao: "LPPT", name: "Lisbon", runways: ["03", "21"], elevation: 374 },
   info: "C",
   time: "1250",
   day: 24,
-  runway: "02",
+  runway: "03",
   windDir: 20,
   windSpeed: 15,
   gust: 25,
@@ -55,8 +55,8 @@ describe("weather", () => {
     expect(checkAnswer("1013", qnh.keys, "").ok).toBe(false);
     const [info, runway, , , , contact] = atisQuestions(LPPT);
     expect(checkAnswer("Charlie", info.keys, "").ok).toBe(true);
-    expect(checkAnswer("runway 02", runway.keys, "").ok).toBe(true);
-    expect(checkAnswer("2", runway.keys, "").ok).toBe(true);
+    expect(checkAnswer("runway 03", runway.keys, "").ok).toBe(true);
+    expect(checkAnswer("3", runway.keys, "").ok).toBe(true);
     expect(checkAnswer("information Charlie", contact.keys, "").ok).toBe(true);
     expect(checkAnswer("Charlie", contact.keys, "").ok).toBe(false);
   });
@@ -90,7 +90,7 @@ describe("weather", () => {
     for (let i = 0; i < 300; i++) {
       const w = makeWeather();
       expect(w.dew).toBeLessThan(w.temp);
-      expect(w.airport.runways.map((n) => String(n).padStart(2, "0"))).toContain(w.runway.replace(/[LRC]$/, ""));
+      expect(w.airport.runways).toContain(w.runway);
       for (const q of [...metarQuestions(w), ...atisQuestions(w)]) {
         const ans = q.keys.map((k) => k.split("|")[0]).join(" ");
         expect(checkAnswer(ans, q.keys, "").ok, `${toMetar(w)} ${q.id} ${ans}`).toBe(true);

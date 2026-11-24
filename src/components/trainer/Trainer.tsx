@@ -1,8 +1,9 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { checkAnswer, fillCallsign, type KeyResult } from "@/lib/engine/normalize";
+import { fillCallsign } from "@/lib/engine/normalize";
+import { choiceOptions, gradeStep, referenceOf, type ClauseResult } from "@/lib/engine/grade";
 import { newCallsign } from "@/lib/engine/callsign";
-import { LEVELS, isQuiz, type AnswerMode, type Licence, type Simulation, type Step } from "@/lib/engine/types";
+import { LEVELS, isCall, isQuiz, type AnswerMode, type Licence, type Simulation, type Step } from "@/lib/engine/types";
 import { ACCENTS } from "@/lib/i18n/dict";
 import { useI18n } from "@/lib/i18n/provider";
 import { loadProgress, saveResult, type Progress } from "./progress";
@@ -15,6 +16,7 @@ import MistakesReview from "./MistakesReview";
 import { dayKey, dueCards, loadDeck, recordMistake, recordReview, saveDeck, type Deck } from "@/lib/engine/srs";
 import { NOISE_LEVELS, type NoiseLevel } from "./radioNoise";
 import WeatherDrill from "./WeatherDrill";
+import AnswerDetail from "./AnswerDetail";
 import { useSpeechInput } from "./useSpeechInput";
 
 type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam" | "mistakes" | "achievements";
@@ -42,7 +44,9 @@ interface Run {
 
 interface Feedback {
   ok: boolean;
-  results?: KeyResult[];
+  results?: ClauseResult[];
+  extra?: string[];
+  hints?: string[];
   revealed?: boolean;
 }
 
@@ -374,6 +378,8 @@ function SimRun(props: {
   const { run, voice, accentLang } = props;
   const step: Step = run.sim.steps[run.index];
   const quiz = isQuiz(step);
+  const call = isCall(step);
+  const choice = run.mode === "choose" || quiz;
   const cs = run.callsign;
 
   const [answer, setAnswer] = useState("");
@@ -386,9 +392,9 @@ function SimRun(props: {
   const [wrongPicks, setWrongPicks] = useState<string[]>([]);
   const nextRef = useRef<HTMLButtonElement>(null);
 
-  const reference = fillCallsign(quiz ? step.answer : step.readback, cs);
+  const reference = referenceOf(step, cs);
   const options = useMemo(
-    () => shuffle([reference, ...step.wrong.map((w) => fillCallsign(w, cs))]),
+    () => shuffle(choiceOptions(step, cs)),
     // a new order per step only
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [step.id, cs],
@@ -405,8 +411,8 @@ function SimRun(props: {
   }, [voice.supported]);
 
   const play = useCallback(() => {
-    if (!quiz) voice.speak(fillCallsign(step.atc, cs), accentLang, slow);
-  }, [quiz, voice, step, cs, accentLang, slow]);
+    if (!quiz && !call) voice.speak(fillCallsign(step.atc, cs), accentLang, slow);
+  }, [quiz, call, voice, step, cs, accentLang, slow]);
 
   // speak each new transmission automatically (the student has already clicked to get here)
   useEffect(() => {
@@ -416,8 +422,8 @@ function SimRun(props: {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step.id, run.finished]);
 
-  const mark = (ok: boolean, results?: KeyResult[]) => {
-    setFeedback({ ok, results });
+  const mark = (ok: boolean, detail?: Omit<Feedback, "ok">) => {
+    setFeedback({ ok, ...detail });
     if (ok) {
       setSolved(true);
       setShowText(true);
@@ -434,8 +440,8 @@ function SimRun(props: {
 
   const check = (text = answer) => {
     if (solved || !text.trim()) return;
-    const r = checkAnswer(text, step.keys, cs);
-    mark(r.ok, r.results);
+    const r = gradeStep(step, text, cs);
+    mark(r.ok, { results: r.results, extra: r.extra, hints: r.hints });
   };
 
   const choose = (opt: string) => {
@@ -517,15 +523,17 @@ function SimRun(props: {
               t.theoryCtx
             ) : (
               <>
-                <b>{step.phase}.</b> {step.context_pt}
+                <b>{step.phase}.</b> {fillCallsign(step.context_pt, cs)}
               </>
             )}
           </p>
 
           <div className="card">
-            <div className="lbl">{quiz ? t.question : t.atcTx}</div>
+            <div className="lbl">{quiz ? t.question : call ? t.callTask : t.atcTx}</div>
             {quiz ? (
               <p className="q">{step.q_pt}</p>
+            ) : call ? (
+              <p className="q">{fillCallsign(step.task_pt, cs)}</p>
             ) : (
               <>
                 <div className="row">
@@ -555,9 +563,9 @@ function SimRun(props: {
 
           <div className="card">
             <label className="lbl" htmlFor="answer">
-              {quiz ? t.yourAnswer : t.yourReadback}
+              {quiz ? t.yourAnswer : call ? t.yourCall : t.yourReadback}
             </label>
-            {run.mode === "choose" ? (
+            {choice ? (
               <div className="opts">
                 {options.map((o) => (
                   <button
@@ -614,7 +622,7 @@ function SimRun(props: {
                       else check();
                     }
                   }}
-                  placeholder={run.mode === "voice" ? t.phVoice : quiz ? t.phQuiz : t.phWrite}
+                  placeholder={run.mode === "voice" ? t.phVoice : call ? t.phCall : t.phWrite}
                   autoComplete="off"
                   autoCapitalize="off"
                   spellCheck={false}
@@ -622,7 +630,7 @@ function SimRun(props: {
               </div>
             )}
             <div className="row">
-              {run.mode !== "choose" && (
+              {!choice && (
                 <button className="btn primary" onClick={() => check()} disabled={solved}>
                   {t.check}
                 </button>
@@ -637,26 +645,18 @@ function SimRun(props: {
             <div className={`fb ${feedback.ok ? "good" : "badfb"}`}>
               <div className={`score ${feedback.ok ? "ok" : "bad"}`}>
                 {feedback.ok
-                  ? run.mode === "choose"
+                  ? choice
                     ? t.correct
-                    : quiz
-                      ? t.right
+                    : call
+                      ? t.callOk
                       : t.readbackOk
-                  : run.mode === "choose"
+                  : choice
                     ? t.wrongChoice
-                    : quiz || !feedback.results
-                      ? t.notYet
+                    : !feedback.results || feedback.results.every((r) => r.ok)
+                      ? t.wrongAnswer
                       : t.missing(feedback.results.filter((r) => !r.ok).length, feedback.results.length)}
               </div>
-              {!quiz && feedback.results && (
-                <ul className="chips">
-                  {feedback.results.map((r) => (
-                    <li key={r.label} className={r.ok ? "y" : "n"}>
-                      {r.ok ? "✓" : "✗"} {r.label}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              {!feedback.ok && <AnswerDetail feedback={feedback} />}
               {!feedback.ok && !feedback.revealed && (
                 <>
                   <p className="note">{t.tryAgain}</p>
@@ -675,9 +675,9 @@ function SimRun(props: {
               )}
               {(feedback.ok || feedback.revealed) && (
                 <>
-                  <div className="lbl">{quiz ? t.answer : t.reference}</div>
+                  <div className="lbl">{quiz ? t.answer : call ? t.referenceCall : t.reference}</div>
                   <p className="msg">{reference}</p>
-                  {!quiz && <p className="pt">{fillCallsign(step.readback_pt, cs)}</p>}
+                  {!quiz && <p className="pt">{fillCallsign(call ? step.call_pt : step.readback_pt, cs)}</p>}
                   <p className="note">{step.note_pt}</p>
                   {!feedback.ok && <p className="note">{t.nowDo[run.mode]}</p>}
                 </>
@@ -755,7 +755,24 @@ function Review({ sims, id, setId }: { sims: Simulation[]; id: string; setId: (i
               <span>#{i + 1}</span>
             </div>
             <p className="q">{st.q_pt}</p>
-            <p className="msg">{fillCallsign(st.answer, cs)}</p>
+            <p className="msg">{st.answer}</p>
+            <p className="note">{st.note_pt}</p>
+          </article>
+        ) : isCall(st) ? (
+          <article className="card" key={st.id}>
+            <div className="meta">
+              <b>{st.phase}</b>
+              <span>
+                {st.station} {st.freq}
+              </span>
+              <span>#{i + 1}</span>
+            </div>
+            <p className="ctx">{fillCallsign(st.context_pt, cs)}</p>
+            <p className="q">{fillCallsign(st.task_pt, cs)}</p>
+            <p className="msg">
+              {t.pilot}: {fillCallsign(st.call, cs)}
+            </p>
+            <p className="pt">{fillCallsign(st.call_pt, cs)}</p>
             <p className="note">{st.note_pt}</p>
           </article>
         ) : (

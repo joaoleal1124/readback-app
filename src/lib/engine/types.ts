@@ -1,6 +1,10 @@
 export type Licence = "PPL" | "ATPL";
 
-/** A radio exchange: ATC transmits, the pilot reads back. Text may contain {CS} for the callsign. */
+/**
+ * ATC transmits and the pilot reads back. Text may contain {CS} for the callsign.
+ * The answer is graded against `readback` (and any `accept` alternative) as a whole:
+ * every element, in order, and nothing else. See grade.ts.
+ */
 export interface TransmissionStep {
   type?: undefined;
   id: string;
@@ -12,27 +16,44 @@ export interface TransmissionStep {
   atc_pt: string;
   readback: string;
   readback_pt: string;
-  /** Elements a correct answer must contain. "a|b" accepts either alternative. */
-  keys: string[];
-  /** Wrong options for multiple choice. */
-  wrong: string[];
+  /** Other complete readbacks that are also correct (another valid order or wording). */
+  accept?: string[];
+  /** Hand-written wrong options for multiple choice. More are generated from the readback. */
+  wrong?: string[];
   note_pt: string;
 }
 
-/** A theory question placed between radio exchanges. */
+/** The pilot speaks first: initial call, request, position report, emergency call. */
+export interface CallStep {
+  type: "call";
+  id: string;
+  phase: string;
+  /** The station the pilot is calling, and the frequency in use. */
+  station: string;
+  freq: string;
+  context_pt: string;
+  /** What the student has to say, element by element, in Portuguese. */
+  task_pt: string;
+  call: string;
+  call_pt: string;
+  accept?: string[];
+  wrong?: string[];
+  note_pt: string;
+}
+
+/** A theory question placed between radio exchanges. Always answered by picking an option. */
 export interface QuizStep {
   type: "quiz";
   id: string;
   phase: string;
   q_pt: string;
-  /** May contain {CS} when the question asks for a whole radio call. */
   answer: string;
-  keys: string[];
+  /** Three wrong options. */
   wrong: string[];
   note_pt: string;
 }
 
-export type Step = TransmissionStep | QuizStep;
+export type Step = TransmissionStep | CallStep | QuizStep;
 
 export interface Simulation {
   id: string;
@@ -57,3 +78,5 @@ export type LevelNumber = (typeof LEVELS)[number]["n"];
 export type AnswerMode = (typeof LEVELS)[number]["mode"];
 
 export const isQuiz = (s: Step): s is QuizStep => s.type === "quiz";
+export const isCall = (s: Step): s is CallStep => s.type === "call";
+export const isTransmission = (s: Step): s is TransmissionStep => s.type === undefined;
