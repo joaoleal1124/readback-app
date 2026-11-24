@@ -68,6 +68,18 @@ contacto e pedir revisão jurídica.
 Ver [docs/alojamento.md](docs/alojamento.md). Resumo: o plano grátis da Vercel não permite uso comercial;
 começamos no servidor caseiro com Cloudflare Tunnel.
 
+## Escolas e instrutores
+
+Em `/escola`, um instrutor cria turmas (cada uma recebe um código de 6 caracteres) e os alunos entram com o código. O instrutor vê os níveis feitos por licença, os exames (número, melhor nota e última nota) e a última atividade de cada aluno. Tudo passa por funções da base de dados (`create_class`, `join_class`, `record_exam`, `class_report`), e o RLS garante que cada instrutor só vê as suas turmas e que os alunos não se veem uns aos outros.
+
+Para testar as migrações num Postgres local, sem Supabase:
+
+```bash
+psql -d teste -f supabase/tests/00_supabase_stub.sql
+for f in supabase/migrations/*.sql; do psql -d teste -v ON_ERROR_STOP=1 -f "$f"; done
+psql -d teste -f supabase/tests/classes_rls.sql   # as linhas ERROR são recusas esperadas
+```
+
 ## Próximos passos
 
 - Pagamentos (Stripe) e verificação da subscrição em `/api/sims`.

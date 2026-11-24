@@ -3,6 +3,7 @@ import { clientIp, rateLimit, resetRateLimits } from "./rateLimit";
 import { safeNextPath } from "./redirect";
 import { buildCsp } from "./csp";
 import { validateResult } from "@/server/progress";
+import { validateExam } from "@/server/exams";
 
 describe("rateLimit", () => {
   beforeEach(() => resetRateLimits());
@@ -71,5 +72,20 @@ describe("validateResult", () => {
     expect(validateResult({ simId: "x", level: 4, errors: 0 }).ok).toBe(false);
     expect(validateResult({ simId: "x", level: 1, errors: -1 }).ok).toBe(false);
     expect(validateResult({ simId: "x", level: 1, errors: 1.5 }).ok).toBe(false);
+  });
+});
+
+describe("validateExam", () => {
+  it("accepts a real exam and refuses impossible numbers", () => {
+    expect(validateExam({ licence: "PPL", right: 15, total: 20, seconds: 600 })).toEqual({
+      ok: true,
+      value: { licence: "PPL", right: 15, total: 20, seconds: 600 },
+    });
+    expect(validateExam({ licence: "CPL", right: 1, total: 20, seconds: 1 }).ok).toBe(false);
+    expect(validateExam({ licence: "PPL", right: 21, total: 20, seconds: 1 }).ok).toBe(false);
+    expect(validateExam({ licence: "PPL", right: 1.5, total: 20, seconds: 1 }).ok).toBe(false);
+    expect(validateExam({ licence: "PPL", right: 1, total: 0, seconds: 1 }).ok).toBe(false);
+    expect(validateExam({ licence: "PPL", right: 1, total: 20, seconds: 99999 }).ok).toBe(false);
+    expect(validateExam(null).ok).toBe(false);
   });
 });

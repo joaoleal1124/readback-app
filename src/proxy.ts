@@ -23,7 +23,8 @@ export async function proxy(request: NextRequest) {
   });
 
   const { data } = await supabase.auth.getUser();
-  if (!data.user && request.nextUrl.pathname.startsWith("/treino")) {
+  const path = request.nextUrl.pathname;
+  if (!data.user && (path.startsWith("/treino") || path.startsWith("/escola"))) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("next", request.nextUrl.pathname);

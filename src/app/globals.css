@@ -135,3 +135,19 @@ textarea { font: 500 1rem/1.5 var(--f-mono); width: 100%; min-height: 84px; padd
 .ach-icon { font-size: 1.6rem; }
 .ach small { color: var(--muted); line-height: 1.35; }
 .toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 12px; font-weight: 600; box-shadow: 0 6px 24px rgba(0,0,0,.25); max-width: calc(100% - 32px); z-index: 20; }
+
+/* schools */
+.school-form { display: flex; flex-wrap: wrap; gap: 8px; }
+.school-form .drill-input { flex: 1 1 200px; width: auto; }
+.school-list { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-direction: column; gap: 6px; }
+.school-list li { display: flex; justify-content: space-between; gap: 12px; }
+.join-code { font: 700 1.2rem var(--f-mono); letter-spacing: .18em; color: var(--accent); }
+.table-wrap { overflow-x: auto; margin: 0 -14px; padding: 0 14px; }
+.report { border-collapse: collapse; width: 100%; min-width: 560px; font-size: .9rem; }
+.report th { text-align: left; font: 600 .72rem var(--f-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.report td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.report td.stale { color: var(--bad); }
+.meter { position: relative; height: 18px; min-width: 90px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
+.meter i { position: absolute; inset: 0 auto 0 0; background: var(--accent); opacity: .35; }
+.meter span { position: relative; font: 600 .75rem/18px var(--f-mono); padding-left: 6px; }
+.link.danger { color: var(--bad); align-self: flex-start; }

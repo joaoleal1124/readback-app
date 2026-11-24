@@ -10,12 +10,14 @@ import {
   loadExams,
   passed,
   saveExam,
+  uploadExam,
   type ExamItem,
   type ExamRecord,
 } from "@/lib/engine/exam";
 import { checkAnswer, fillCallsign } from "@/lib/engine/normalize";
 import { isQuiz, type Licence, type Simulation } from "@/lib/engine/types";
 import { useI18n } from "@/lib/i18n/provider";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 import type { useAtcVoice } from "./useAtcVoice";
 
 type Mode = "choose" | "write";
@@ -98,6 +100,7 @@ export default function Exam(props: {
     };
     for (const a of all) if (!a.ok) props.onMistake?.(a.item.step.id);
     setHistory(saveExam(rec));
+    if (isSupabaseConfigured()) void uploadExam(rec);
     props.onFinish?.(rec);
     setResult({ rec, answers: all, callsign: r.callsign });
     setRun(null);
