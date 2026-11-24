@@ -43,8 +43,30 @@ docker compose up -d --build # http://IP-DO-SERVIDOR:3000
 ## Ligar o Supabase
 
 1. Criar um projeto em supabase.com e copiar o URL e a chave pública (publishable key) para `.env.local` / `.env`.
-2. Correr `supabase/migrations/*.sql` no SQL Editor (ou `supabase db push`).
+2. Correr `supabase/migrations/*.sql` por ordem no SQL Editor (ou `supabase db push`).
 3. Em Authentication → URL Configuration, acrescentar `http://localhost:3000/auth/callback` e o endereço do servidor.
+
+## Segurança
+
+- Login por link no email (sem palavras-passe); a sessão fica em cookies geridos pelo `@supabase/ssr`.
+- O conteúdo (`/api/sims`) só é servido com sessão iniciada e com limite de pedidos.
+- O progresso só é gravado pelo servidor (`/api/progress`), que valida a simulação, o nível e os erros;
+  o navegador só pode ler as suas próprias linhas (RLS).
+- Content-Security-Policy e outros cabeçalhos de segurança em `next.config.ts` (`src/lib/security/csp.ts`).
+- Rate limiting em memória (`src/lib/security/rateLimit.ts`), pensado para um só servidor.
+- No Supabase, em Authentication → Rate Limits, manter um limite baixo de emails de login por hora.
+  Se houver abuso, ligar o CAPTCHA (Cloudflare Turnstile, grátis) em Authentication → Attack Protection.
+
+## Legal
+
+Política de Privacidade (`/privacidade`) e Termos (`/termos`) em português e inglês, em
+`src/components/legal/content.ts`. **São rascunhos:** antes de cobrar, preencher o responsável e o
+contacto e pedir revisão jurídica.
+
+## Alojamento
+
+Ver [docs/alojamento.md](docs/alojamento.md). Resumo: o plano grátis da Vercel não permite uso comercial;
+começamos no servidor caseiro com Cloudflare Tunnel.
 
 ## Próximos passos
 
