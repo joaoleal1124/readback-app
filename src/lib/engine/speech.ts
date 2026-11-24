@@ -8,7 +8,7 @@ const SAY_LETTER: Record<string, string> = {
   X: "X-ray", Y: "Yankee", Z: "Zulu",
 };
 const SAY_SIDE: Record<string, string> = { L: "left", R: "right", C: "center" };
-const SAY_AS_WORD = new Set(["ILS", "VOR", "QNH", "QFE", "ATC", "ATIS", "I"]);
+const SAY_AS_WORD = new Set(["ILS", "VOR", "QNH", "QFE", "ATC", "ATIS", "PAN", "I"]);
 const ONES = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
 const digits = (s: string) => s.split("").map((c) => (c === "." ? "decimal" : SAY_DIGIT[Number(c)])).join(" ");
