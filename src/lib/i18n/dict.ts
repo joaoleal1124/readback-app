@@ -140,6 +140,14 @@ const pt = {
   srsBox: (box: number, last: number) => `Caixa ${box} de ${last}`,
   srsMovedUp: "Certo à primeira: volta mais tarde",
   srsAgainTomorrow: "Certo, mas volta amanhã",
+  achievements: "Conquistas",
+  newAchievement: "Nova conquista",
+  streakDays: (n: number) => (n === 1 ? "1 dia seguido" : `${n} dias seguidos`),
+  streakToday: "Já treinaste hoje. Volta amanhã para continuar a sequência.",
+  streakKeep: "Ainda não treinaste hoje. Faz um treino para não perderes a sequência.",
+  streakStart: "Faz um treino hoje para começar uma sequência.",
+  streakBest: (n: number) => `Melhor sequência: ${n} ${n === 1 ? "dia" : "dias"}`,
+  last14: "Últimos 14 dias",
 };
 
 export type Dict = typeof pt;
@@ -282,6 +290,14 @@ const en: Dict = {
   srsBox: (box, last) => `Box ${box} of ${last}`,
   srsMovedUp: "Right first time: see you later",
   srsAgainTomorrow: "Right, but it comes back tomorrow",
+  achievements: "Achievements",
+  newAchievement: "New achievement",
+  streakDays: (n) => (n === 1 ? "1 day in a row" : `${n} days in a row`),
+  streakToday: "You trained today. Come back tomorrow to keep the streak.",
+  streakKeep: "No training yet today. Do one drill to keep your streak.",
+  streakStart: "Train today to start a streak.",
+  streakBest: (n) => `Best streak: ${n} ${n === 1 ? "day" : "days"}`,
+  last14: "Last 14 days",
 };
 
 export const DICTS: Record<Lang, Dict> = { pt, en };

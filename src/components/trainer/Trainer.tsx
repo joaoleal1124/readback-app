@@ -9,13 +9,15 @@ import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
 import AlphabetGame from "./AlphabetGame";
 import Exam from "./Exam";
+import Achievements from "./Achievements";
+import { ACHIEVEMENTS, loadStats, record, saveStats, streak, unlocked, type Activity, type Stats } from "@/lib/engine/achievements";
 import MistakesReview from "./MistakesReview";
 import { dayKey, dueCards, loadDeck, recordMistake, recordReview, saveDeck, type Deck } from "@/lib/engine/srs";
 import { NOISE_LEVELS, type NoiseLevel } from "./radioNoise";
 import WeatherDrill from "./WeatherDrill";
 import { useSpeechInput } from "./useSpeechInput";
 
-type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam" | "mistakes";
+type View = "home" | "sim" | "review" | "alphabet" | "weather" | "exam" | "mistakes" | "achievements";
 const PREFS_KEY = "readback-prefs";
 
 function readPrefs(): { licence?: Licence; accent?: string; noise?: NoiseLevel } {
@@ -55,10 +57,44 @@ export default function Trainer() {
   const [accentPref, setAccentPref] = useState(() => readPrefs().accent ?? "auto");
   const [noise, setNoise] = useState<NoiseLevel>(() => readPrefs().noise ?? 0);
   const [deck, setDeck] = useState<Deck>(loadDeck);
+  const [stats, setStats] = useState<Stats>(loadStats);
+  const [toast, setToast] = useState<string | null>(null);
+  const progressRef = useRef(progress);
+  useEffect(() => {
+    progressRef.current = progress;
+  }, [progress]);
+  const simsRef = useRef(sims);
+  useEffect(() => {
+    simsRef.current = sims;
+  }, [sims]);
+  const track = useCallback(
+    (a: Activity, done?: Progress) => {
+      setStats((old) => {
+        const next = saveStats(record(old, a, dayKey(new Date())));
+        const ctx = (st: Stats) => ({ stats: st, done: done ?? progressRef.current, sims: simsRef.current ?? [] });
+        const before = unlocked(ctx(old));
+        const fresh = ACHIEVEMENTS.filter((x) => !before.has(x.id) && unlocked(ctx(next)).has(x.id));
+        if (fresh.length) {
+          const [name] = lang === "pt" ? fresh[0].pt : fresh[0].en;
+          setToast(`${fresh[0].icon} ${t.newAchievement}: ${name}`);
+        }
+        return next;
+      });
+    },
+    [lang, t],
+  );
+  useEffect(() => {
+    if (!toast) return;
+    const id = setTimeout(() => setToast(null), 4500);
+    return () => clearTimeout(id);
+  }, [toast]);
   const addMistake = useCallback((stepId: string) => setDeck((d) => saveDeck(recordMistake(d, stepId, dayKey(new Date())))), []);
   const reviewed = useCallback(
-    (stepId: string, ok: boolean) => setDeck((d) => saveDeck(recordReview(d, stepId, ok, dayKey(new Date())))),
-    [],
+    (stepId: string, ok: boolean) => {
+      setDeck((d) => saveDeck(recordReview(d, stepId, ok, dayKey(new Date()))));
+      track({ kind: "review" });
+    },
+    [track],
   );
   const [run, setRun] = useState<Run | null>(null);
   const [reviewId, setReviewId] = useState("");
@@ -97,13 +133,17 @@ export default function Trainer() {
 
   const finish = async (r: Run) => {
     setRun({ ...r, finished: true });
-    setProgress(await saveResult(progress, r.sim.id, r.level, r.errors));
+    const saved = await saveResult(progress, r.sim.id, r.level, r.errors);
+    setProgress(saved);
+    track({ kind: "level", simId: r.sim.id, level: r.level, errors: r.errors }, saved);
   };
 
   if (loadFailed) return <p className="sub">{t.loadError}</p>;
   if (!sims) return <p className="sub">{t.loading}</p>;
   // only reached in the browser, after the simulations load
   const dueCount = dueCards(deck, dayKey(new Date()), 999).length;
+  const streakNow = streak(stats.days, dayKey(new Date()));
+  const got = unlocked({ stats, done: progress, sims });
 
   return (
     <div className="view">
@@ -127,6 +167,13 @@ export default function Trainer() {
           </button>
           <button aria-pressed={view === "review"} onClick={() => setView("review")}>
             {t.review}
+          </button>
+          <button
+            aria-pressed={view === "achievements"}
+            onClick={() => setView("achievements")}
+            aria-label={`${t.achievements}, ${t.streakDays(streakNow)}`}
+          >
+            🔥 {streakNow}
           </button>
         </div>
       )}
@@ -163,9 +210,17 @@ export default function Trainer() {
         />
       )}
 
-      {view === "alphabet" && <AlphabetGame voice={voice} />}
+      {view === "alphabet" && <AlphabetGame voice={voice} onDone={(right) => track({ kind: "alphabet", right })} />}
 
-      {view === "weather" && <WeatherDrill voice={voice} />}
+      {view === "weather" && <WeatherDrill voice={voice} onDone={() => track({ kind: "weather" })} />}
+
+      {view === "achievements" && <Achievements stats={stats} got={got} />}
+
+      {toast && (
+        <div className="toast" role="status">
+          {toast}
+        </div>
+      )}
 
       {view === "exam" && (
         <Exam
@@ -174,6 +229,7 @@ export default function Trainer() {
           voice={voice}
           accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
           onMistake={addMistake}
+          onFinish={(rec) => track({ kind: "exam", score: rec.score, passed: rec.score >= 75 })}
         />
       )}
 
