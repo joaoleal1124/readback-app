@@ -1,0 +1,1735 @@
+[
+ {
+  "id": "cascais-local",
+  "level": "PPL",
+  "title": "Cascais, voo local",
+  "place": "Cascais (LPCS), Portugal",
+  "accent": "pt-PT",
+  "accent_pt": "Português",
+  "summary_pt": "Rolagem, descolagem, saída VFR, circuito e aterragem.",
+  "steps": [
+   {
+    "phase": "Rolagem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás na placa de estacionamento em Cascais, motor a trabalhar, pronto para rolar.",
+    "atc": "{CS}, taxi to holding point runway 35, QNH 1016.",
+    "atc_pt": "{CS}, role para o ponto de espera da pista 35, QNH 1016.",
+    "readback": "Taxi to holding point runway 35, QNH 1016, {CS}.",
+    "readback_pt": "Rolar para o ponto de espera da pista 35, QNH 1016, {CS}.",
+    "keys": [
+     "holding point",
+     "runway 35",
+     "1016",
+     "{CS}"
+    ],
+    "wrong": [
+     "Taxi runway 35, {CS}.",
+     "Taxi to holding point runway 35, QNH 1013, {CS}."
+    ],
+    "note_pt": "A pista e o QNH são sempre colacionados. O indicativo vai no fim do readback.",
+    "id": "cascais-local-01"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás no ponto de espera da pista 35, verificações feitas.",
+    "atc": "{CS}, runway 35, line up and wait.",
+    "atc_pt": "{CS}, pista 35, alinhe e aguarde.",
+    "readback": "Runway 35, line up and wait, {CS}.",
+    "readback_pt": "Pista 35, alinhar e aguardar, {CS}.",
+    "keys": [
+     "35",
+     "line up and wait",
+     "{CS}"
+    ],
+    "wrong": [
+     "Lining up, {CS}.",
+     "Runway 35, cleared for take-off, {CS}."
+    ],
+    "note_pt": "Instruções para entrar, alinhar, aguardar ou atravessar uma pista são sempre colacionadas com o designador da pista.",
+    "id": "cascais-local-02"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás alinhado na pista 35.",
+    "atc": "{CS}, wind 340 degrees 12 knots, runway 35, cleared for take-off.",
+    "atc_pt": "{CS}, vento 340 graus 12 nós, pista 35, autorizado a descolar.",
+    "readback": "Runway 35, cleared for take-off, {CS}.",
+    "readback_pt": "Pista 35, autorizado a descolar, {CS}.",
+    "keys": [
+     "35",
+     "cleared for take-off",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared for take-off, {CS}.",
+     "Roger, {CS}."
+    ],
+    "note_pt": "O vento não precisa de ser colacionado. A pista e a autorização de descolagem são obrigatórias.",
+    "id": "cascais-local-03"
+   },
+   {
+    "phase": "Saída",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Ainda no ponto de espera. O controlador dá-te as instruções de saída antes da descolagem.",
+    "atc": "{CS}, after departure leave the control zone via Sierra, not above 1500 feet, report at Sierra.",
+    "atc_pt": "{CS}, após a descolagem saia da zona de controlo via Sierra, não acima de 1500 pés, reporte em Sierra.",
+    "readback": "Leave the control zone via Sierra, not above 1500 feet, wilco, {CS}.",
+    "readback_pt": "Sair da zona de controlo via Sierra, não acima de 1500 pés, cumprirei, {CS}.",
+    "keys": [
+     "via Sierra",
+     "not above 1500",
+     "wilco|report at Sierra|report Sierra",
+     "{CS}"
+    ],
+    "wrong": [
+     "Via Sierra, wilco, {CS}.",
+     "Leave the control zone via Sierra, not above 2500 feet, wilco, {CS}."
+    ],
+    "note_pt": "Restrições de altitude e rotas de saída são colacionadas. \"Wilco\" mostra que vais cumprir o pedido de reporte.",
+    "id": "cascais-local-04"
+   },
+   {
+    "phase": "Saída",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Acabaste de descolar e estás a subir.",
+    "atc": "{CS}, squawk 7041.",
+    "atc_pt": "{CS}, selecione o código transponder 7041.",
+    "readback": "Squawk 7041, {CS}.",
+    "readback_pt": "Código 7041, {CS}.",
+    "keys": [
+     "7041",
+     "{CS}"
+    ],
+    "wrong": [
+     "Squawk 7014, {CS}.",
+     "Roger, {CS}."
+    ],
+    "note_pt": "Códigos SSR são sempre colacionados, algarismo a algarismo.",
+    "id": "cascais-local-05"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Que código transponder se usa em falha de comunicações rádio?",
+    "answer": "7600",
+    "keys": [
+     "7600"
+    ],
+    "wrong": [
+     "7700",
+     "7500"
+    ],
+    "note_pt": "7600 é falha de rádio. 7700 é emergência e 7500 é interferência ilícita.",
+    "id": "cascais-local-06"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás em Sierra, a sair da zona de controlo.",
+    "atc": "{CS}, contact Lisboa Information 130.600.",
+    "atc_pt": "{CS}, contacte Lisboa Informação em 130.600.",
+    "readback": "Lisboa Information 130.6, {CS}.",
+    "readback_pt": "Lisboa Informação 130.6, {CS}.",
+    "keys": [
+     "130.6",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Lisboa Information 136.0, {CS}."
+    ],
+    "note_pt": "Mudanças de frequência são sempre colacionadas. Os zeros finais podem ser omitidos.",
+    "id": "cascais-local-07"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás a regressar a Cascais e fizeste a chamada inicial à torre.",
+    "atc": "{CS}, join right downwind runway 35, QNH 1015, report downwind.",
+    "atc_pt": "{CS}, entre na perna do vento pela direita da pista 35, QNH 1015, reporte na perna do vento.",
+    "readback": "Join right downwind runway 35, QNH 1015, wilco, {CS}.",
+    "readback_pt": "Entrar na perna do vento pela direita da pista 35, QNH 1015, cumprirei, {CS}.",
+    "keys": [
+     "right downwind",
+     "35",
+     "1015",
+     "{CS}"
+    ],
+    "wrong": [
+     "Join downwind, wilco, {CS}.",
+     "Join left downwind runway 35, QNH 1015, wilco, {CS}."
+    ],
+    "note_pt": "O lado do circuito (direita ou esquerda) é parte da instrução e tem de ser colacionado.",
+    "id": "cascais-local-08"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Reportaste na perna do vento. Há outro avião à tua frente.",
+    "atc": "{CS}, number 2, follow the Cessna on base.",
+    "atc_pt": "{CS}, número 2, siga o Cessna na perna base.",
+    "readback": "Number 2, traffic in sight, {CS}.",
+    "readback_pt": "Número 2, tráfego à vista, {CS}.",
+    "keys": [
+     "number 2",
+     "traffic in sight|follow",
+     "{CS}"
+    ],
+    "wrong": [
+     "Number 1, {CS}.",
+     "Roger, {CS}."
+    ],
+    "note_pt": "Colaciona a posição na sequência. Se não vires o tráfego, diz \"looking out\" em vez de \"traffic in sight\".",
+    "id": "cascais-local-09"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás na final da pista 35.",
+    "atc": "{CS}, runway 35, cleared to land, wind 320 degrees 8 knots.",
+    "atc_pt": "{CS}, pista 35, autorizado a aterrar, vento 320 graus 8 nós.",
+    "readback": "Runway 35, cleared to land, {CS}.",
+    "readback_pt": "Pista 35, autorizado a aterrar, {CS}.",
+    "keys": [
+     "35",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 35, landing, {CS}."
+    ],
+    "note_pt": "A autorização de aterragem é sempre colacionada com a pista.",
+    "id": "cascais-local-10"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás na final curta e um veículo entrou na pista.",
+    "atc": "{CS}, go around, I say again, go around, vehicle on the runway.",
+    "atc_pt": "{CS}, borrega, repito, borrega, veículo na pista.",
+    "readback": "Going around, {CS}.",
+    "readback_pt": "A borregar, {CS}.",
+    "keys": [
+     "going around",
+     "{CS}"
+    ],
+    "wrong": [
+     "Roger, continuing, {CS}.",
+     "Say again, {CS}."
+    ],
+    "note_pt": "Executa primeiro a manobra e só depois responde. \"Going around\" basta.",
+    "id": "cascais-local-11"
+   },
+   {
+    "phase": "Após aterragem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Aterraste e estás a desacelerar na pista 35.",
+    "atc": "{CS}, vacate left via Bravo, taxi to the apron.",
+    "atc_pt": "{CS}, livre a pista pela esquerda via Bravo, role para a placa.",
+    "readback": "Vacate left via Bravo, taxi to the apron, {CS}.",
+    "readback_pt": "Livrar pela esquerda via Bravo, rolar para a placa, {CS}.",
+    "keys": [
+     "vacate left",
+     "via Bravo",
+     "apron",
+     "{CS}"
+    ],
+    "wrong": [
+     "Vacating, {CS}.",
+     "Vacate right via Bravo, {CS}."
+    ],
+    "note_pt": "Instruções de rolagem são colacionadas, incluindo o caminho de circulação.",
+    "id": "cascais-local-12"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Cascais Tower",
+    "freq": "120.300",
+    "context_pt": "Estás no ponto de espera. Um Piper está na final curta.",
+    "atc": "{CS}, behind the landing Piper on short final, line up runway 35 behind.",
+    "atc_pt": "{CS}, atrás do Piper a aterrar em final curta, alinhe na pista 35 atrás.",
+    "readback": "Behind the landing Piper, line up runway 35 behind, {CS}.",
+    "readback_pt": "Atrás do Piper a aterrar, alinhar na pista 35 atrás, {CS}.",
+    "keys": [
+     "behind the landing Piper",
+     "line up",
+     "35",
+     "{CS}"
+    ],
+    "wrong": [
+     "Lining up runway 35, {CS}.",
+     "Line up and wait runway 35, {CS}."
+    ],
+    "note_pt": "Numa autorização condicional, colaciona a condição primeiro e repete \"behind\" no fim. Confirma que identificas o tráfego certo.",
+    "id": "cascais-local-13"
+   }
+  ]
+ },
+ {
+  "id": "faro-nav",
+  "level": "PPL",
+  "title": "Faro, navegação VFR",
+  "place": "Faro (LPFR), Portugal",
+  "accent": "pt-PT",
+  "accent_pt": "Português",
+  "summary_pt": "Saída de um aeroporto internacional em VFR, tráfego e regresso.",
+  "steps": [
+   {
+    "phase": "Rolagem",
+    "station": "Faro Ground",
+    "freq": "121.900",
+    "context_pt": "Estás na placa da aviação geral em Faro, pronto para rolar.",
+    "atc": "{CS}, runway 28, wind 270 degrees 10 knots, QNH 1018, taxi to holding point Alfa runway 28.",
+    "atc_pt": "{CS}, pista 28, vento 270 graus 10 nós, QNH 1018, role para o ponto de espera Alfa da pista 28.",
+    "readback": "Runway 28, QNH 1018, taxi to holding point Alfa runway 28, {CS}.",
+    "readback_pt": "Pista 28, QNH 1018, rolar para o ponto de espera Alfa da pista 28, {CS}.",
+    "keys": [
+     "28",
+     "1018",
+     "holding point",
+     "{CS}"
+    ],
+    "wrong": [
+     "Taxi to holding point, {CS}.",
+     "Runway 28, QNH 1013, taxi to holding point Alfa runway 28, {CS}."
+    ],
+    "note_pt": "Mesmo que o vento venha na mensagem, só a pista, o QNH e a rolagem são obrigatórios.",
+    "id": "faro-nav-01"
+   },
+   {
+    "phase": "Saída",
+    "station": "Faro Tower",
+    "freq": "118.575",
+    "context_pt": "No ponto de espera Alfa, pronto para descolar.",
+    "atc": "{CS}, after departure right turn, route via Lima, not above 2000 feet, squawk 7052.",
+    "atc_pt": "{CS}, após a descolagem volte à direita, siga via Lima, não acima de 2000 pés, código 7052.",
+    "readback": "Right turn, via Lima, not above 2000 feet, squawk 7052, {CS}.",
+    "readback_pt": "Volta à direita, via Lima, não acima de 2000 pés, código 7052, {CS}.",
+    "keys": [
+     "right turn",
+     "via Lima",
+     "2000",
+     "7052",
+     "{CS}"
+    ],
+    "wrong": [
+     "Via Lima, squawk 7052, {CS}.",
+     "Left turn, via Lima, not above 2000 feet, squawk 7052, {CS}."
+    ],
+    "note_pt": "Sentido da volta, rota, restrição de altitude e código: tudo é colacionado.",
+    "id": "faro-nav-02"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Faro Approach",
+    "freq": "119.400",
+    "context_pt": "Estás a sul de Loulé, a 1800 pés.",
+    "atc": "{CS}, traffic 2 o'clock, 3 miles, opposite direction, a Piper at 1500 feet.",
+    "atc_pt": "{CS}, tráfego às 2 horas, 3 milhas, em sentido contrário, um Piper a 1500 pés.",
+    "readback": "Traffic in sight, {CS}.",
+    "readback_pt": "Tráfego à vista, {CS}.",
+    "keys": [
+     "traffic in sight|looking out|negative contact",
+     "{CS}"
+    ],
+    "wrong": [
+     "Roger, 1500 feet, {CS}.",
+     "Wilco, {CS}."
+    ],
+    "note_pt": "Responde com o que vês: \"traffic in sight\", \"looking out\" ou \"negative contact\".",
+    "id": "faro-nav-03"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Qual é a frequência de emergência aeronáutica?",
+    "answer": "121.5",
+    "keys": [
+     "121.5"
+    ],
+    "wrong": [
+     "123.45",
+     "118.0"
+    ],
+    "note_pt": "121.5 MHz é a frequência internacional de emergência (guarda).",
+    "id": "faro-nav-04"
+   },
+   {
+    "phase": "Regresso",
+    "station": "Faro Approach",
+    "freq": "119.400",
+    "context_pt": "Estás a regressar a Faro, a 10 milhas a oeste.",
+    "atc": "{CS}, contact Faro Tower 118.575.",
+    "atc_pt": "{CS}, contacte a Torre de Faro em 118.575.",
+    "readback": "Faro Tower 118.575, {CS}.",
+    "readback_pt": "Torre de Faro 118.575, {CS}.",
+    "keys": [
+     "118.575",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Faro Tower 118.755, {CS}."
+    ],
+    "note_pt": "Mudanças de frequência são sempre colacionadas.",
+    "id": "faro-nav-05"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Faro Tower",
+    "freq": "118.575",
+    "context_pt": "Fizeste a chamada inicial à torre.",
+    "atc": "{CS}, join left base runway 28, report final.",
+    "atc_pt": "{CS}, entre na perna base pela esquerda da pista 28, reporte na final.",
+    "readback": "Join left base runway 28, wilco, {CS}.",
+    "readback_pt": "Entrar na base esquerda da pista 28, cumprirei, {CS}.",
+    "keys": [
+     "left base",
+     "28",
+     "{CS}"
+    ],
+    "wrong": [
+     "Wilco, {CS}.",
+     "Join right base runway 28, wilco, {CS}."
+    ],
+    "note_pt": "Perna do circuito e lado são colacionados.",
+    "id": "faro-nav-06"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Faro Tower",
+    "freq": "118.575",
+    "context_pt": "Estás na final da pista 28.",
+    "atc": "{CS}, runway 28, cleared to land, wind 260 degrees 9 knots.",
+    "atc_pt": "{CS}, pista 28, autorizado a aterrar, vento 260 graus 9 nós.",
+    "readback": "Runway 28, cleared to land, {CS}.",
+    "readback_pt": "Pista 28, autorizado a aterrar, {CS}.",
+    "keys": [
+     "28",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 10, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem, sempre.",
+    "id": "faro-nav-07"
+   }
+  ]
+ },
+ {
+  "id": "madrid-cv",
+  "level": "PPL",
+  "title": "Madrid Cuatro Vientos, circuitos",
+  "place": "Cuatro Vientos (LECU), Espanha",
+  "accent": "es-ES",
+  "accent_pt": "Espanhol",
+  "summary_pt": "Circuitos de tráfego com ATC espanhol: espera, sequência e touch and go.",
+  "steps": [
+   {
+    "phase": "Rolagem",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Estás na placa, pronto para rolar para circuitos.",
+    "atc": "{CS}, runway 28, QNH 1021, taxi to holding point runway 28 via Alfa.",
+    "atc_pt": "{CS}, pista 28, QNH 1021, role para o ponto de espera da pista 28 via Alfa.",
+    "readback": "Runway 28, QNH 1021, taxi to holding point runway 28 via Alfa, {CS}.",
+    "readback_pt": "Pista 28, QNH 1021, rolar para o ponto de espera da pista 28 via Alfa, {CS}.",
+    "keys": [
+     "28",
+     "1021",
+     "holding point",
+     "{CS}"
+    ],
+    "wrong": [
+     "Taxiing, {CS}.",
+     "Runway 28, QNH 1012, taxi to holding point runway 28 via Alfa, {CS}."
+    ],
+    "note_pt": "Pista, QNH e instrução de rolagem.",
+    "id": "madrid-cv-01"
+   },
+   {
+    "phase": "Rolagem",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Estás a rolar e aproximas-te do ponto de espera.",
+    "atc": "{CS}, hold position, traffic landing.",
+    "atc_pt": "{CS}, mantenha a posição, tráfego a aterrar.",
+    "readback": "Holding position, {CS}.",
+    "readback_pt": "A manter a posição, {CS}.",
+    "keys": [
+     "holding position|hold position",
+     "{CS}"
+    ],
+    "wrong": [
+     "Lining up, {CS}.",
+     "Roger, continuing taxi, {CS}."
+    ],
+    "note_pt": "\"Hold position\" é uma instrução de segurança e tem de ser colacionada.",
+    "id": "madrid-cv-02"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Estás alinhado na pista 28.",
+    "atc": "{CS}, runway 28, cleared for take-off, wind 250 degrees 7 knots, report crosswind.",
+    "atc_pt": "{CS}, pista 28, autorizado a descolar, vento 250 graus 7 nós, reporte na perna de vento cruzado.",
+    "readback": "Runway 28, cleared for take-off, wilco, {CS}.",
+    "readback_pt": "Pista 28, autorizado a descolar, cumprirei, {CS}.",
+    "keys": [
+     "28",
+     "cleared for take-off",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared for take-off, {CS}.",
+     "Runway 10, cleared for take-off, {CS}."
+    ],
+    "note_pt": "Pista e autorização de descolagem. \"Wilco\" para o pedido de reporte.",
+    "id": "madrid-cv-03"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Estás na perna do vento. Há vários aviões no circuito.",
+    "atc": "{CS}, extend downwind, number 3, I will call your base.",
+    "atc_pt": "{CS}, prolongue a perna do vento, número 3, eu chamo a sua base.",
+    "readback": "Extend downwind, number 3, {CS}.",
+    "readback_pt": "Prolongar a perna do vento, número 3, {CS}.",
+    "keys": [
+     "extend downwind",
+     "number 3",
+     "{CS}"
+    ],
+    "wrong": [
+     "Number 3, {CS}.",
+     "Extend downwind, number 2, {CS}."
+    ],
+    "note_pt": "Colaciona a instrução e a posição na sequência.",
+    "id": "madrid-cv-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "O que significa a palavra WILCO?",
+    "answer": "Will comply",
+    "keys": [
+     "will comply"
+    ],
+    "wrong": [
+     "Will continue",
+     "Will call"
+    ],
+    "note_pt": "WILCO (will comply): compreendi a mensagem e vou cumprir. Nunca se diz \"roger wilco\".",
+    "id": "madrid-cv-05"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Estás na final da pista 28 e pediste touch and go.",
+    "atc": "{CS}, runway 28, cleared touch and go.",
+    "atc_pt": "{CS}, pista 28, autorizado toque e arremetida.",
+    "readback": "Runway 28, cleared touch and go, {CS}.",
+    "readback_pt": "Pista 28, autorizado toque e arremetida, {CS}.",
+    "keys": [
+     "28",
+     "touch and go",
+     "{CS}"
+    ],
+    "wrong": [
+     "Touch and go, {CS}.",
+     "Runway 28, cleared to land, {CS}."
+    ],
+    "note_pt": "A autorização de touch and go é colacionada com a pista.",
+    "id": "madrid-cv-06"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Cuatro Vientos Tower",
+    "freq": "118.700",
+    "context_pt": "Último circuito, na final da pista 28.",
+    "atc": "{CS}, runway 28, cleared to land, wind calm.",
+    "atc_pt": "{CS}, pista 28, autorizado a aterrar, vento calmo.",
+    "readback": "Runway 28, cleared to land, {CS}.",
+    "readback_pt": "Pista 28, autorizado a aterrar, {CS}.",
+    "keys": [
+     "28",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Landing, {CS}.",
+     "Runway 28, cleared touch and go, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem.",
+    "id": "madrid-cv-07"
+   }
+  ]
+ },
+ {
+  "id": "biggin-hill",
+  "level": "PPL",
+  "title": "Biggin Hill, chegada VFR",
+  "place": "Biggin Hill (EGKB), Reino Unido",
+  "accent": "en-GB",
+  "accent_pt": "Britânico",
+  "summary_pt": "Chegada com serviços de tráfego britânicos, entrada overhead e QFE.",
+  "steps": [
+   {
+    "phase": "Chegada",
+    "station": "Biggin Hill Approach",
+    "freq": "129.405",
+    "context_pt": "Fizeste a chamada inicial a 15 milhas a sul.",
+    "atc": "{CS}, squawk 7010, QNH 1009.",
+    "atc_pt": "{CS}, código 7010, QNH 1009.",
+    "readback": "Squawk 7010, QNH 1009, {CS}.",
+    "readback_pt": "Código 7010, QNH 1009, {CS}.",
+    "keys": [
+     "7010",
+     "1009",
+     "{CS}"
+    ],
+    "wrong": [
+     "Squawk 7010, {CS}.",
+     "Squawk 7001, QNH 1009, {CS}."
+    ],
+    "note_pt": "Código e QNH são sempre colacionados.",
+    "id": "biggin-hill-01"
+   },
+   {
+    "phase": "Chegada",
+    "station": "Biggin Hill Approach",
+    "freq": "129.405",
+    "context_pt": "Estás identificado no radar.",
+    "atc": "{CS}, Basic Service, report Sevenoaks.",
+    "atc_pt": "{CS}, Basic Service, reporte em Sevenoaks.",
+    "readback": "Basic Service, wilco, {CS}.",
+    "readback_pt": "Basic Service, cumprirei, {CS}.",
+    "keys": [
+     "Basic Service",
+     "{CS}"
+    ],
+    "wrong": [
+     "Wilco, {CS}.",
+     "Traffic Service, wilco, {CS}."
+    ],
+    "note_pt": "No Reino Unido o tipo de serviço (Basic, Traffic, Deconfliction) tem de ser colacionado.",
+    "id": "biggin-hill-02"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Biggin Hill Tower",
+    "freq": "134.805",
+    "context_pt": "Passaste Sevenoaks e mudaste para a torre.",
+    "atc": "{CS}, join overhead runway 21, left hand, QFE 998.",
+    "atc_pt": "{CS}, entre na vertical para a pista 21, circuito pela esquerda, QFE 998.",
+    "readback": "Join overhead runway 21, left hand, QFE 998, {CS}.",
+    "readback_pt": "Entrar na vertical, pista 21, circuito pela esquerda, QFE 998, {CS}.",
+    "keys": [
+     "overhead",
+     "21",
+     "left hand",
+     "998",
+     "{CS}"
+    ],
+    "wrong": [
+     "Join overhead, {CS}.",
+     "Join overhead runway 21, right hand, QFE 998, {CS}."
+    ],
+    "note_pt": "O QFE dá a altura acima do aeródromo. Colaciona-o como o QNH.",
+    "id": "biggin-hill-03"
+   },
+   {
+    "phase": "Circuito",
+    "station": "Biggin Hill Tower",
+    "freq": "134.805",
+    "context_pt": "Estás na perna do vento. Um Robin está à tua frente.",
+    "atc": "{CS}, number 2, follow the Robin on late downwind.",
+    "atc_pt": "{CS}, número 2, siga o Robin no fim da perna do vento.",
+    "readback": "Number 2, traffic in sight, {CS}.",
+    "readback_pt": "Número 2, tráfego à vista, {CS}.",
+    "keys": [
+     "number 2",
+     "traffic in sight|follow|looking out",
+     "{CS}"
+    ],
+    "wrong": [
+     "Roger, {CS}.",
+     "Number 1, {CS}."
+    ],
+    "note_pt": "Posição na sequência e se vês o tráfego.",
+    "id": "biggin-hill-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "O que deves dizer quando não percebeste uma mensagem do ATC?",
+    "answer": "Say again",
+    "keys": [
+     "say again"
+    ],
+    "wrong": [
+     "Repeat",
+     "Pardon"
+    ],
+    "note_pt": "\"Say again\" pede a repetição. \"Repeat\" não se usa porque, em contexto militar, significa repetir um tiro.",
+    "id": "biggin-hill-05"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Biggin Hill Tower",
+    "freq": "134.805",
+    "context_pt": "Estás na final da pista 21.",
+    "atc": "{CS}, runway 21, cleared to land, surface wind 230 degrees 11 knots.",
+    "atc_pt": "{CS}, pista 21, autorizado a aterrar, vento à superfície 230 graus 11 nós.",
+    "readback": "Runway 21, cleared to land, {CS}.",
+    "readback_pt": "Pista 21, autorizado a aterrar, {CS}.",
+    "keys": [
+     "21",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 03, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem.",
+    "id": "biggin-hill-06"
+   },
+   {
+    "phase": "Após aterragem",
+    "station": "Biggin Hill Tower",
+    "freq": "134.805",
+    "context_pt": "Aterraste e estás a desacelerar.",
+    "atc": "{CS}, vacate left at Charlie, taxi to the apron.",
+    "atc_pt": "{CS}, livre pela esquerda em Charlie, role para a placa.",
+    "readback": "Vacate left at Charlie, taxi to the apron, {CS}.",
+    "readback_pt": "Livrar pela esquerda em Charlie, rolar para a placa, {CS}.",
+    "keys": [
+     "vacate left",
+     "Charlie",
+     "apron",
+     "{CS}"
+    ],
+    "wrong": [
+     "Vacating, {CS}.",
+     "Vacate right at Charlie, taxi to the apron, {CS}."
+    ],
+    "note_pt": "Lado e caminho de circulação são colacionados.",
+    "id": "biggin-hill-07"
+   }
+  ]
+ },
+ {
+  "id": "lisboa-porto",
+  "level": "ATPL",
+  "title": "Lisboa para Porto",
+  "place": "Lisboa (LPPT) e Porto (LPPR), Portugal",
+  "accent": "pt-PT",
+  "accent_pt": "Português",
+  "summary_pt": "Voo IFR completo: autorização, rolagem, subida, espera e ILS.",
+  "steps": [
+   {
+    "phase": "Autorização",
+    "station": "Lisboa Delivery",
+    "freq": "118.950",
+    "context_pt": "Voo Gaivota 452, Lisboa para Porto. Pediste a autorização de rota.",
+    "atc": "{CS}, cleared to Porto, NIKAV 2B departure, climb altitude 6000 feet, squawk 4521.",
+    "atc_pt": "{CS}, autorizado para o Porto, saída NIKAV 2B, suba para altitude 6000 pés, código 4521.",
+    "readback": "Cleared to Porto, NIKAV 2B departure, climb altitude 6000 feet, squawk 4521, {CS}.",
+    "readback_pt": "Autorizado para o Porto, saída NIKAV 2B, subir para altitude 6000 pés, código 4521, {CS}.",
+    "keys": [
+     "Porto",
+     "NIKAV 2B",
+     "6000",
+     "4521",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to Porto, squawk 4521, {CS}.",
+     "Cleared to Porto, NIKAV 2B departure, climb altitude 5000 feet, squawk 4521, {CS}."
+    ],
+    "note_pt": "A autorização ATC é colacionada por inteiro: destino, saída, nível autorizado e código.",
+    "id": "lisboa-porto-01"
+   },
+   {
+    "phase": "Rolagem",
+    "station": "Lisboa Ground",
+    "freq": "121.750",
+    "context_pt": "Estás na posição de estacionamento, portas fechadas.",
+    "atc": "{CS}, push and start approved, facing west.",
+    "atc_pt": "{CS}, push-back e arranque aprovados, virado para oeste.",
+    "readback": "Push and start approved, facing west, {CS}.",
+    "readback_pt": "Push-back e arranque aprovados, virado para oeste, {CS}.",
+    "keys": [
+     "push and start approved",
+     "facing west",
+     "{CS}"
+    ],
+    "wrong": [
+     "Pushing, {CS}.",
+     "Push and start approved, facing east, {CS}."
+    ],
+    "note_pt": "Colaciona a orientação final do avião para evitar conflitos na placa.",
+    "id": "lisboa-porto-02"
+   },
+   {
+    "phase": "Rolagem",
+    "station": "Lisboa Ground",
+    "freq": "121.750",
+    "context_pt": "Push-back concluído, pronto para rolar.",
+    "atc": "{CS}, taxi to holding point runway 21 via U and S, hold short of runway 17.",
+    "atc_pt": "{CS}, role para o ponto de espera da pista 21 via U e S, aguarde antes da pista 17.",
+    "readback": "Taxi to holding point runway 21 via Uniform and Sierra, hold short of runway 17, {CS}.",
+    "readback_pt": "Rolar para o ponto de espera da pista 21 via Uniform e Sierra, aguardar antes da pista 17, {CS}.",
+    "keys": [
+     "holding point",
+     "21",
+     "hold short",
+     "17",
+     "{CS}"
+    ],
+    "wrong": [
+     "Taxi holding point runway 21, {CS}.",
+     "Taxi to holding point runway 21 via Uniform and Sierra, cross runway 17, {CS}."
+    ],
+    "note_pt": "\"Hold short\" é crítico para a segurança e tem de ser colacionado com a pista em causa.",
+    "id": "lisboa-porto-03"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Lisboa Tower",
+    "freq": "118.100",
+    "context_pt": "Estás alinhado na pista 21.",
+    "atc": "{CS}, wind 220 degrees 10 knots, runway 21, cleared for take-off.",
+    "atc_pt": "{CS}, vento 220 graus 10 nós, pista 21, autorizado a descolar.",
+    "readback": "Runway 21, cleared for take-off, {CS}.",
+    "readback_pt": "Pista 21, autorizado a descolar, {CS}.",
+    "keys": [
+     "21",
+     "cleared for take-off",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared for take-off, {CS}.",
+     "Runway 12, cleared for take-off, {CS}."
+    ],
+    "note_pt": "Pista e autorização de descolagem, sempre.",
+    "id": "lisboa-porto-04"
+   },
+   {
+    "phase": "Subida",
+    "station": "Lisboa Radar",
+    "freq": "119.100",
+    "context_pt": "Fizeste a chamada inicial após a descolagem, a passar 3000 pés.",
+    "atc": "{CS}, Lisboa Radar, identified, climb FL150.",
+    "atc_pt": "{CS}, Lisboa Radar, identificado, suba para o nível de voo 150.",
+    "readback": "Climb FL150, {CS}.",
+    "readback_pt": "Subir para o nível de voo 150, {CS}.",
+    "keys": [
+     "FL150",
+     "{CS}"
+    ],
+    "wrong": [
+     "Climbing, {CS}.",
+     "Climb FL160, {CS}."
+    ],
+    "note_pt": "Diz-se \"flight level one five zero\". Níveis e altitudes autorizados são sempre colacionados.",
+    "id": "lisboa-porto-05"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Lisboa Control",
+    "freq": "125.550",
+    "context_pt": "Em cruzeiro no FL150.",
+    "atc": "{CS}, proceed direct BUSEN.",
+    "atc_pt": "{CS}, prossiga direto a BUSEN.",
+    "readback": "Direct BUSEN, {CS}.",
+    "readback_pt": "Direto a BUSEN, {CS}.",
+    "keys": [
+     "direct BUSEN",
+     "{CS}"
+    ],
+    "wrong": [
+     "Roger, {CS}.",
+     "Direct BUSAN, {CS}."
+    ],
+    "note_pt": "Instruções de rota são colacionadas. Se não conheceres o ponto, pede que o soletrem.",
+    "id": "lisboa-porto-06"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Que código transponder indica uma emergência?",
+    "answer": "7700",
+    "keys": [
+     "7700"
+    ],
+    "wrong": [
+     "7600",
+     "7500"
+    ],
+    "note_pt": "7700 emergência, 7600 falha de rádio, 7500 interferência ilícita.",
+    "id": "lisboa-porto-07"
+   },
+   {
+    "phase": "Descida",
+    "station": "Lisboa Control",
+    "freq": "125.550",
+    "context_pt": "A aproximar-te do Porto.",
+    "atc": "{CS}, descend FL90, reduce speed 250 knots, expect ILS approach runway 17.",
+    "atc_pt": "{CS}, desça para o nível de voo 90, reduza a velocidade para 250 nós, espere aproximação ILS à pista 17.",
+    "readback": "Descend FL90, speed 250 knots, expect ILS runway 17, {CS}.",
+    "readback_pt": "Descer para o nível de voo 90, velocidade 250 nós, esperar ILS à pista 17, {CS}.",
+    "keys": [
+     "FL90",
+     "250",
+     "17",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descending, {CS}.",
+     "Descend FL90, speed 220 knots, expect ILS runway 17, {CS}."
+    ],
+    "note_pt": "Nível, velocidade e pista esperada são todos colacionados.",
+    "id": "lisboa-porto-08"
+   },
+   {
+    "phase": "Espera",
+    "station": "Porto Approach",
+    "freq": "121.100",
+    "context_pt": "Há atrasos na chegada ao Porto.",
+    "atc": "{CS}, hold at PRT, maintain FL70, expected approach time 35.",
+    "atc_pt": "{CS}, entre em espera sobre PRT, mantenha o nível de voo 70, hora prevista de aproximação aos 35.",
+    "readback": "Hold at PRT, maintain FL70, expected approach time 35, {CS}.",
+    "readback_pt": "Espera sobre PRT, manter nível de voo 70, hora prevista de aproximação aos 35, {CS}.",
+    "keys": [
+     "hold",
+     "PRT",
+     "FL70",
+     "35",
+     "{CS}"
+    ],
+    "wrong": [
+     "Holding, {CS}.",
+     "Hold at PRT, maintain FL70, {CS}."
+    ],
+    "note_pt": "A hora prevista de aproximação (EAT) é importante em caso de falha de comunicações, por isso colaciona-a.",
+    "id": "lisboa-porto-09"
+   },
+   {
+    "phase": "Descida",
+    "station": "Porto Approach",
+    "freq": "121.100",
+    "context_pt": "Saíste da espera e estás a descer.",
+    "atc": "{CS}, descend altitude 4000 feet, QNH 1012.",
+    "atc_pt": "{CS}, desça para altitude 4000 pés, QNH 1012.",
+    "readback": "Descend altitude 4000 feet, QNH 1012, {CS}.",
+    "readback_pt": "Descer para altitude 4000 pés, QNH 1012, {CS}.",
+    "keys": [
+     "4000",
+     "1012",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descend 4000 feet, {CS}.",
+     "Descend altitude 4000 feet, QNH 1021, {CS}."
+    ],
+    "note_pt": "Na primeira descida para altitude, o QNH tem de ser colacionado. Muda de nível de voo para altitude.",
+    "id": "lisboa-porto-10"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Porto Approach",
+    "freq": "121.100",
+    "context_pt": "Estás a ser vetorizado para a final.",
+    "atc": "{CS}, turn left heading 200, descend altitude 3000 feet, cleared ILS approach runway 17, report established.",
+    "atc_pt": "{CS}, volte à esquerda rumo 200, desça para altitude 3000 pés, autorizado aproximação ILS à pista 17, reporte estabelecido.",
+    "readback": "Left heading 200, descend altitude 3000 feet, cleared ILS approach runway 17, wilco, {CS}.",
+    "readback_pt": "Esquerda rumo 200, descer para altitude 3000 pés, autorizado aproximação ILS à pista 17, cumprirei, {CS}.",
+    "keys": [
+     "left heading 200",
+     "3000",
+     "cleared ILS",
+     "17",
+     "{CS}"
+    ],
+    "wrong": [
+     "Heading 200, cleared ILS, {CS}.",
+     "Right heading 200, descend altitude 3000 feet, cleared ILS approach runway 17, wilco, {CS}."
+    ],
+    "note_pt": "Numa instrução longa, colaciona tudo pela mesma ordem. O sentido da volta (esquerda ou direita) é obrigatório.",
+    "id": "lisboa-porto-11"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Porto Approach",
+    "freq": "121.100",
+    "context_pt": "Estás estabelecido no localizador da pista 17.",
+    "atc": "{CS}, contact Porto Tower 118.000.",
+    "atc_pt": "{CS}, contacte a Torre do Porto em 118.000.",
+    "readback": "Porto Tower 118.0, {CS}.",
+    "readback_pt": "Torre do Porto 118.0, {CS}.",
+    "keys": [
+     "118.0|118",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Porto Tower 119.0, {CS}."
+    ],
+    "note_pt": "Mudanças de frequência são sempre colacionadas.",
+    "id": "lisboa-porto-12"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Porto Tower",
+    "freq": "118.000",
+    "context_pt": "Estás na final da pista 17, a 4 milhas.",
+    "atc": "{CS}, wind 180 degrees 14 knots, runway 17, cleared to land.",
+    "atc_pt": "{CS}, vento 180 graus 14 nós, pista 17, autorizado a aterrar.",
+    "readback": "Runway 17, cleared to land, {CS}.",
+    "readback_pt": "Pista 17, autorizado a aterrar, {CS}.",
+    "keys": [
+     "17",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 35, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem, sempre.",
+    "id": "lisboa-porto-13"
+   }
+  ]
+ },
+ {
+  "id": "frankfurt-dep",
+  "level": "ATPL",
+  "title": "Partida de Frankfurt",
+  "place": "Frankfurt (EDDF), Alemanha",
+  "accent": "de-DE",
+  "accent_pt": "Alemão",
+  "summary_pt": "Autorização com SID, rolagem num grande aeroporto e subida com o radar alemão.",
+  "steps": [
+   {
+    "phase": "Autorização",
+    "station": "Frankfurt Delivery",
+    "freq": "121.900",
+    "context_pt": "Voo para Lisboa. Pediste a autorização de rota.",
+    "atc": "{CS}, cleared to Lisbon, TOBAK 7S departure, runway 25C, climb 5000 feet, squawk 2315.",
+    "atc_pt": "{CS}, autorizado para Lisboa, saída TOBAK 7S, pista 25C, suba para 5000 pés, código 2315.",
+    "readback": "Cleared to Lisbon, TOBAK 7S departure, runway 25C, climb 5000 feet, squawk 2315, {CS}.",
+    "readback_pt": "Autorizado para Lisboa, saída TOBAK 7S, pista 25C, subir para 5000 pés, código 2315, {CS}.",
+    "keys": [
+     "Lisbon",
+     "TOBAK 7S",
+     "25C",
+     "5000",
+     "2315",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to Lisbon, squawk 2315, {CS}.",
+     "Cleared to Lisbon, TOBAK 7S departure, runway 25L, climb 5000 feet, squawk 2315, {CS}."
+    ],
+    "note_pt": "Em pistas paralelas, Left, Center e Right fazem parte do designador e têm de ser colacionados.",
+    "id": "frankfurt-dep-01"
+   },
+   {
+    "phase": "Rolagem",
+    "station": "Frankfurt Ground",
+    "freq": "121.800",
+    "context_pt": "Push-back terminado.",
+    "atc": "{CS}, taxi to holding point runway 25C via November 3.",
+    "atc_pt": "{CS}, role para o ponto de espera da pista 25C via November 3.",
+    "readback": "Taxi to holding point runway 25C via November 3, {CS}.",
+    "readback_pt": "Rolar para o ponto de espera da pista 25C via November 3, {CS}.",
+    "keys": [
+     "holding point",
+     "25C",
+     "{CS}"
+    ],
+    "wrong": [
+     "Taxiing, {CS}.",
+     "Taxi to holding point runway 25R via November 3, {CS}."
+    ],
+    "note_pt": "Pista com designador completo e caminho de rolagem.",
+    "id": "frankfurt-dep-02"
+   },
+   {
+    "phase": "Descolagem",
+    "station": "Frankfurt Tower",
+    "freq": "119.900",
+    "context_pt": "Estás alinhado na pista 25C.",
+    "atc": "{CS}, wind 240 degrees 15 knots, runway 25C, cleared for take-off.",
+    "atc_pt": "{CS}, vento 240 graus 15 nós, pista 25C, autorizado a descolar.",
+    "readback": "Runway 25C, cleared for take-off, {CS}.",
+    "readback_pt": "Pista 25C, autorizado a descolar, {CS}.",
+    "keys": [
+     "25C",
+     "cleared for take-off",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared for take-off, {CS}.",
+     "Runway 25L, cleared for take-off, {CS}."
+    ],
+    "note_pt": "Pista e autorização de descolagem.",
+    "id": "frankfurt-dep-03"
+   },
+   {
+    "phase": "Subida",
+    "station": "Langen Radar",
+    "freq": "120.155",
+    "context_pt": "Após a descolagem, a passar 2500 pés.",
+    "atc": "{CS}, Langen Radar, identified, climb FL120, proceed direct TOBAK.",
+    "atc_pt": "{CS}, Langen Radar, identificado, suba para o nível de voo 120, prossiga direto a TOBAK.",
+    "readback": "Climb FL120, direct TOBAK, {CS}.",
+    "readback_pt": "Subir para o nível de voo 120, direto a TOBAK, {CS}.",
+    "keys": [
+     "FL120",
+     "direct TOBAK",
+     "{CS}"
+    ],
+    "wrong": [
+     "Climbing, {CS}.",
+     "Climb FL100, direct TOBAK, {CS}."
+    ],
+    "note_pt": "Nível autorizado e rota.",
+    "id": "frankfurt-dep-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Que código transponder indica uma interferência ilícita (sequestro)?",
+    "answer": "7500",
+    "keys": [
+     "7500"
+    ],
+    "wrong": [
+     "7700",
+     "7600"
+    ],
+    "note_pt": "7500 interferência ilícita, 7600 falha de rádio, 7700 emergência.",
+    "id": "frankfurt-dep-05"
+   },
+   {
+    "phase": "Subida",
+    "station": "Langen Radar",
+    "freq": "120.155",
+    "context_pt": "A subir para o FL120.",
+    "atc": "{CS}, climb FL240, contact Rhein Radar 132.415.",
+    "atc_pt": "{CS}, suba para o nível de voo 240, contacte Rhein Radar em 132.415.",
+    "readback": "Climb FL240, Rhein Radar 132.415, {CS}.",
+    "readback_pt": "Subir para o nível de voo 240, Rhein Radar 132.415, {CS}.",
+    "keys": [
+     "FL240",
+     "132.415",
+     "{CS}"
+    ],
+    "wrong": [
+     "Climb FL240, {CS}.",
+     "Climb FL240, Rhein Radar 132.145, {CS}."
+    ],
+    "note_pt": "Nível e frequência na mesma instrução: colaciona os dois.",
+    "id": "frankfurt-dep-06"
+   }
+  ]
+ },
+ {
+  "id": "paris-cdg",
+  "level": "ATPL",
+  "title": "Chegada a Paris Charles de Gaulle",
+  "place": "Paris CDG (LFPG), França",
+  "accent": "fr-FR",
+  "accent_pt": "Francês",
+  "summary_pt": "Descida, vetores e ILS com ATC francês num aeroporto de pistas paralelas.",
+  "steps": [
+   {
+    "phase": "Descida",
+    "station": "Paris Control",
+    "freq": "128.100",
+    "context_pt": "Estás em cruzeiro, a 120 milhas de Paris.",
+    "atc": "{CS}, descend FL110, reduce speed 280 knots.",
+    "atc_pt": "{CS}, desça para o nível de voo 110, reduza a velocidade para 280 nós.",
+    "readback": "Descend FL110, speed 280 knots, {CS}.",
+    "readback_pt": "Descer para o nível de voo 110, velocidade 280 nós, {CS}.",
+    "keys": [
+     "FL110",
+     "280",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descending, {CS}.",
+     "Descend FL100, speed 280 knots, {CS}."
+    ],
+    "note_pt": "Nível e velocidade.",
+    "id": "paris-cdg-01"
+   },
+   {
+    "phase": "Descida",
+    "station": "Paris Control",
+    "freq": "128.100",
+    "context_pt": "A descer para o FL110.",
+    "atc": "{CS}, contact De Gaulle Approach 121.150.",
+    "atc_pt": "{CS}, contacte De Gaulle Approach em 121.150.",
+    "readback": "De Gaulle Approach 121.15, {CS}.",
+    "readback_pt": "De Gaulle Approach 121.15, {CS}.",
+    "keys": [
+     "121.15",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "De Gaulle Approach 121.5, {CS}."
+    ],
+    "note_pt": "Frequência sempre colacionada.",
+    "id": "paris-cdg-02"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "De Gaulle Approach",
+    "freq": "121.150",
+    "context_pt": "Fizeste a chamada inicial com a informação ATIS Bravo.",
+    "atc": "{CS}, descend altitude 5000 feet, QNH 1007.",
+    "atc_pt": "{CS}, desça para altitude 5000 pés, QNH 1007.",
+    "readback": "Descend altitude 5000 feet, QNH 1007, {CS}.",
+    "readback_pt": "Descer para altitude 5000 pés, QNH 1007, {CS}.",
+    "keys": [
+     "5000",
+     "1007",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descend 5000 feet, {CS}.",
+     "Descend altitude 5000 feet, QNH 1017, {CS}."
+    ],
+    "note_pt": "Primeira altitude: QNH obrigatório.",
+    "id": "paris-cdg-03"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "De Gaulle Approach",
+    "freq": "121.150",
+    "context_pt": "Estás a ser vetorizado para a pista 27R.",
+    "atc": "{CS}, turn left heading 290, cleared ILS approach runway 27R.",
+    "atc_pt": "{CS}, volte à esquerda rumo 290, autorizado aproximação ILS à pista 27R.",
+    "readback": "Left heading 290, cleared ILS approach runway 27R, {CS}.",
+    "readback_pt": "Esquerda rumo 290, autorizado aproximação ILS à pista 27R, {CS}.",
+    "keys": [
+     "left heading 290",
+     "cleared ILS",
+     "27R",
+     "{CS}"
+    ],
+    "wrong": [
+     "Heading 290, cleared ILS, {CS}.",
+     "Left heading 290, cleared ILS approach runway 27L, {CS}."
+    ],
+    "note_pt": "Com pistas paralelas, confirmar Left ou Right evita aproximações à pista errada.",
+    "id": "paris-cdg-04"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "De Gaulle Approach",
+    "freq": "121.150",
+    "context_pt": "Estabelecido no ILS da pista 27R.",
+    "atc": "{CS}, speed 160 knots until 4 miles final, contact De Gaulle Tower 119.250.",
+    "atc_pt": "{CS}, velocidade 160 nós até 4 milhas da final, contacte a Torre De Gaulle em 119.250.",
+    "readback": "160 knots until 4 miles final, De Gaulle Tower 119.25, {CS}.",
+    "readback_pt": "160 nós até 4 milhas da final, Torre De Gaulle 119.25, {CS}.",
+    "keys": [
+     "160",
+     "4 miles",
+     "119.25",
+     "{CS}"
+    ],
+    "wrong": [
+     "Tower 119.25, {CS}.",
+     "160 knots until 4 miles final, De Gaulle Tower 119.52, {CS}."
+    ],
+    "note_pt": "Restrição de velocidade e frequência são ambas colacionadas.",
+    "id": "paris-cdg-05"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "De Gaulle Tower",
+    "freq": "119.250",
+    "context_pt": "Estás a 6 milhas da pista 27R.",
+    "atc": "{CS}, runway 27R, cleared to land, wind 260 degrees 12 knots.",
+    "atc_pt": "{CS}, pista 27R, autorizado a aterrar, vento 260 graus 12 nós.",
+    "readback": "Runway 27R, cleared to land, {CS}.",
+    "readback_pt": "Pista 27R, autorizado a aterrar, {CS}.",
+    "keys": [
+     "27R",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 27L, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista com designador completo e autorização de aterragem.",
+    "id": "paris-cdg-06"
+   }
+  ]
+ },
+ {
+  "id": "jfk-arr",
+  "level": "ATPL",
+  "title": "Chegada a Nova Iorque JFK",
+  "place": "New York JFK (KJFK), EUA",
+  "accent": "en-US",
+  "accent_pt": "Americano",
+  "summary_pt": "Fraseologia americana: \"descend and maintain\", altímetro em polegadas e vento abreviado.",
+  "steps": [
+   {
+    "phase": "Descida",
+    "station": "New York Approach",
+    "freq": "132.400",
+    "context_pt": "Estás a chegar a Nova Iorque vindo de Lisboa.",
+    "atc": "{CS}, descend and maintain 4000, altimeter 29.92.",
+    "atc_pt": "{CS}, desça e mantenha 4000 pés, altímetro 29.92 polegadas.",
+    "readback": "Descend and maintain 4000, altimeter 29.92, {CS}.",
+    "readback_pt": "Descer e manter 4000, altímetro 29.92, {CS}.",
+    "keys": [
+     "4000",
+     "29.92",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descending 4000, {CS}.",
+     "Descend and maintain 4000, altimeter 29.29, {CS}."
+    ],
+    "note_pt": "Nos EUA o acerto altimétrico é dado em polegadas de mercúrio (inHg).",
+    "id": "jfk-arr-01"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Nos EUA, em que unidade é dado o acerto altimétrico?",
+    "answer": "Inches of mercury",
+    "keys": [
+     "inches|polegadas|inhg"
+    ],
+    "wrong": [
+     "Hectopascals",
+     "Millibars"
+    ],
+    "note_pt": "Nos EUA usam-se polegadas de mercúrio. Na Europa, hectopascais.",
+    "id": "jfk-arr-02"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "New York Approach",
+    "freq": "132.400",
+    "context_pt": "A descer para 4000 pés.",
+    "atc": "{CS}, turn left heading 130, vectors ILS runway 4R.",
+    "atc_pt": "{CS}, volte à esquerda rumo 130, vetores para o ILS da pista 4R.",
+    "readback": "Left heading 130, vectors ILS runway 4R, {CS}.",
+    "readback_pt": "Esquerda rumo 130, vetores ILS pista 4R, {CS}.",
+    "keys": [
+     "left heading 130",
+     "4R",
+     "{CS}"
+    ],
+    "wrong": [
+     "Heading 130, {CS}.",
+     "Right heading 130, vectors ILS runway 4R, {CS}."
+    ],
+    "note_pt": "Sentido da volta, rumo e pista.",
+    "id": "jfk-arr-03"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "New York Approach",
+    "freq": "132.400",
+    "context_pt": "Estás a interceptar o localizador da 4R.",
+    "atc": "{CS}, maintain 3000 until established, cleared ILS runway 4R approach.",
+    "atc_pt": "{CS}, mantenha 3000 até estabelecido, autorizado aproximação ILS à pista 4R.",
+    "readback": "3000 until established, cleared ILS runway 4R approach, {CS}.",
+    "readback_pt": "3000 até estabelecido, autorizado ILS à pista 4R, {CS}.",
+    "keys": [
+     "3000",
+     "established",
+     "cleared ILS",
+     "4R",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared ILS, {CS}.",
+     "3000 until established, cleared ILS runway 4L approach, {CS}."
+    ],
+    "note_pt": "A altitude a manter até estar estabelecido faz parte da autorização.",
+    "id": "jfk-arr-04"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "New York Approach",
+    "freq": "132.400",
+    "context_pt": "Estabelecido no localizador.",
+    "atc": "{CS}, contact Kennedy Tower 119.1.",
+    "atc_pt": "{CS}, contacte a Torre Kennedy em 119.1.",
+    "readback": "Kennedy Tower 119.1, {CS}.",
+    "readback_pt": "Torre Kennedy 119.1, {CS}.",
+    "keys": [
+     "119.1",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Kennedy Tower 119.7, {CS}."
+    ],
+    "note_pt": "Frequência colacionada.",
+    "id": "jfk-arr-05"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Kennedy Tower",
+    "freq": "119.100",
+    "context_pt": "A 5 milhas da pista 4R.",
+    "atc": "{CS}, Kennedy Tower, runway 4R, cleared to land, wind 050 at 12.",
+    "atc_pt": "{CS}, Torre Kennedy, pista 4R, autorizado a aterrar, vento 050 a 12 nós.",
+    "readback": "Runway 4R, cleared to land, {CS}.",
+    "readback_pt": "Pista 4R, autorizado a aterrar, {CS}.",
+    "keys": [
+     "4R",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 4L, cleared to land, {CS}."
+    ],
+    "note_pt": "Nos EUA o vento diz-se de forma abreviada (\"050 at 12\").",
+    "id": "jfk-arr-06"
+   },
+   {
+    "phase": "Após aterragem",
+    "station": "Kennedy Tower",
+    "freq": "119.100",
+    "context_pt": "Aterraste e estás a sair da pista.",
+    "atc": "{CS}, turn right on Kilo, hold short of runway 4L, remain this frequency.",
+    "atc_pt": "{CS}, vire à direita em Kilo, aguarde antes da pista 4L, mantenha esta frequência.",
+    "readback": "Right on Kilo, hold short of runway 4L, {CS}.",
+    "readback_pt": "Direita em Kilo, aguardar antes da pista 4L, {CS}.",
+    "keys": [
+     "Kilo",
+     "hold short",
+     "4L",
+     "{CS}"
+    ],
+    "wrong": [
+     "Right on Kilo, {CS}.",
+     "Right on Kilo, cross runway 4L, {CS}."
+    ],
+    "note_pt": "\"Hold short\" é sempre colacionado com a pista.",
+    "id": "jfk-arr-07"
+   }
+  ]
+ },
+ {
+  "id": "santa-maria",
+  "level": "ATPL",
+  "title": "Em rota: Santa Maria Oceânico",
+  "place": "Lisboa para Ponta Delgada (LPPD), Açores",
+  "accent": "pt-PT",
+  "accent_pt": "Português",
+  "summary_pt": "Cruzeiro, mudança para controlo oceânico, número de Mach e aproximação aos Açores.",
+  "steps": [
+   {
+    "phase": "Subida",
+    "station": "Lisboa Control",
+    "freq": "131.325",
+    "context_pt": "Descolaste de Lisboa e estás a subir para oeste.",
+    "atc": "{CS}, climb FL360, proceed direct BETOM.",
+    "atc_pt": "{CS}, suba para o nível de voo 360, prossiga direto a BETOM.",
+    "readback": "Climb FL360, direct BETOM, {CS}.",
+    "readback_pt": "Subir para o nível de voo 360, direto a BETOM, {CS}.",
+    "keys": [
+     "FL360",
+     "direct BETOM",
+     "{CS}"
+    ],
+    "wrong": [
+     "Climbing, {CS}.",
+     "Climb FL340, direct BETOM, {CS}."
+    ],
+    "note_pt": "Nível e rota.",
+    "id": "santa-maria-01"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Lisboa Control",
+    "freq": "131.325",
+    "context_pt": "Estás a chegar ao limite da FIR de Lisboa.",
+    "atc": "{CS}, contact Santa Maria Control 132.150.",
+    "atc_pt": "{CS}, contacte Santa Maria Controlo em 132.150.",
+    "readback": "Santa Maria Control 132.15, {CS}.",
+    "readback_pt": "Santa Maria Controlo 132.15, {CS}.",
+    "keys": [
+     "132.15",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Santa Maria Control 132.5, {CS}."
+    ],
+    "note_pt": "Frequência colacionada.",
+    "id": "santa-maria-02"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Santa Maria Control",
+    "freq": "132.150",
+    "context_pt": "Primeiro contacto com Santa Maria.",
+    "atc": "{CS}, Santa Maria Control, radar contact, maintain FL360, report passing GUNTO.",
+    "atc_pt": "{CS}, Santa Maria Controlo, contacto radar, mantenha o nível de voo 360, reporte ao passar GUNTO.",
+    "readback": "Maintain FL360, wilco, {CS}.",
+    "readback_pt": "Manter o nível de voo 360, cumprirei, {CS}.",
+    "keys": [
+     "FL360",
+     "{CS}"
+    ],
+    "wrong": [
+     "Wilco, {CS}.",
+     "Maintain FL340, wilco, {CS}."
+    ],
+    "note_pt": "Nível mantido e \"wilco\" para o reporte.",
+    "id": "santa-maria-03"
+   },
+   {
+    "phase": "Em rota",
+    "station": "Santa Maria Control",
+    "freq": "132.150",
+    "context_pt": "Em cruzeiro no FL360.",
+    "atc": "{CS}, maintain Mach .78.",
+    "atc_pt": "{CS}, mantenha Mach 0.78.",
+    "readback": "Maintain Mach .78, {CS}.",
+    "readback_pt": "Manter Mach 0.78, {CS}.",
+    "keys": [
+     "Mach",
+     "78",
+     "{CS}"
+    ],
+    "wrong": [
+     "Roger, {CS}.",
+     "Maintain Mach .87, {CS}."
+    ],
+    "note_pt": "Diz-se \"Mach decimal seven eight\". Em espaço oceânico a separação depende do Mach.",
+    "id": "santa-maria-04"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "O que significa \"ROGER\"?",
+    "answer": "I have received all of your last transmission",
+    "keys": [
+     "received|recebi"
+    ],
+    "wrong": [
+     "I will comply",
+     "Yes"
+    ],
+    "note_pt": "ROGER significa \"recebi toda a sua última transmissão\". Não é \"sim\" nem \"vou cumprir\".",
+    "id": "santa-maria-05"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Santa Maria Approach",
+    "freq": "119.100",
+    "context_pt": "A 40 milhas de Ponta Delgada.",
+    "atc": "{CS}, descend altitude 3000 feet, QNH 1019, cleared VOR approach runway 30.",
+    "atc_pt": "{CS}, desça para altitude 3000 pés, QNH 1019, autorizado aproximação VOR à pista 30.",
+    "readback": "Descend altitude 3000 feet, QNH 1019, cleared VOR approach runway 30, {CS}.",
+    "readback_pt": "Descer para altitude 3000 pés, QNH 1019, autorizado aproximação VOR à pista 30, {CS}.",
+    "keys": [
+     "3000",
+     "1019",
+     "cleared VOR",
+     "30",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared VOR approach, {CS}.",
+     "Descend altitude 3000 feet, QNH 1009, cleared VOR approach runway 30, {CS}."
+    ],
+    "note_pt": "Altitude, QNH, tipo de aproximação e pista.",
+    "id": "santa-maria-06"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Ponta Delgada Tower",
+    "freq": "118.100",
+    "context_pt": "Estás na final da pista 30, com vento forte.",
+    "atc": "{CS}, runway 30, cleared to land, wind 290 degrees 18 knots, gusting 28.",
+    "atc_pt": "{CS}, pista 30, autorizado a aterrar, vento 290 graus 18 nós, rajadas de 28.",
+    "readback": "Runway 30, cleared to land, {CS}.",
+    "readback_pt": "Pista 30, autorizado a aterrar, {CS}.",
+    "keys": [
+     "30",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 12, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem.",
+    "id": "santa-maria-07"
+   }
+  ]
+ },
+ {
+  "id": "dubai-arr",
+  "level": "ATPL",
+  "title": "Chegada ao Dubai",
+  "place": "Dubai (OMDB), Emirados Árabes Unidos",
+  "accent": "en-IN",
+  "accent_pt": "Indiano",
+  "summary_pt": "Chegada a um hub do Médio Oriente com controladores de sotaques variados.",
+  "steps": [
+   {
+    "phase": "Descida",
+    "station": "Dubai Approach",
+    "freq": "124.900",
+    "context_pt": "Estás a chegar ao Dubai vindo de Lisboa.",
+    "atc": "{CS}, descend FL100, speed 250 knots.",
+    "atc_pt": "{CS}, desça para o nível de voo 100, velocidade 250 nós.",
+    "readback": "Descend FL100, speed 250 knots, {CS}.",
+    "readback_pt": "Descer para o nível de voo 100, velocidade 250 nós, {CS}.",
+    "keys": [
+     "FL100",
+     "250",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descending, {CS}.",
+     "Descend FL100, speed 220 knots, {CS}."
+    ],
+    "note_pt": "Nível e velocidade.",
+    "id": "dubai-arr-01"
+   },
+   {
+    "phase": "Descida",
+    "station": "Dubai Approach",
+    "freq": "124.900",
+    "context_pt": "A descer para o FL100.",
+    "atc": "{CS}, descend altitude 4000 feet, QNH 1003, expect ILS runway 30L.",
+    "atc_pt": "{CS}, desça para altitude 4000 pés, QNH 1003, espere ILS à pista 30L.",
+    "readback": "Descend altitude 4000 feet, QNH 1003, expect ILS runway 30L, {CS}.",
+    "readback_pt": "Descer para altitude 4000 pés, QNH 1003, esperar ILS à pista 30L, {CS}.",
+    "keys": [
+     "4000",
+     "1003",
+     "30L",
+     "{CS}"
+    ],
+    "wrong": [
+     "Descend 4000 feet, {CS}.",
+     "Descend altitude 4000 feet, QNH 1003, expect ILS runway 30R, {CS}."
+    ],
+    "note_pt": "Altitude, QNH e pista esperada.",
+    "id": "dubai-arr-02"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Dubai Approach",
+    "freq": "124.900",
+    "context_pt": "Estás a ser vetorizado.",
+    "atc": "{CS}, turn right heading 270, cleared ILS approach runway 30L, report established.",
+    "atc_pt": "{CS}, volte à direita rumo 270, autorizado aproximação ILS à pista 30L, reporte estabelecido.",
+    "readback": "Right heading 270, cleared ILS approach runway 30L, wilco, {CS}.",
+    "readback_pt": "Direita rumo 270, autorizado ILS à pista 30L, cumprirei, {CS}.",
+    "keys": [
+     "right heading 270",
+     "cleared ILS",
+     "30L",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared ILS, {CS}.",
+     "Right heading 270, cleared ILS approach runway 30R, wilco, {CS}."
+    ],
+    "note_pt": "Volta, rumo, autorização e pista com designador completo.",
+    "id": "dubai-arr-03"
+   },
+   {
+    "type": "quiz",
+    "phase": "Pergunta",
+    "q_pt": "Se não percebeste parte da mensagem por causa do sotaque, o que dizes?",
+    "answer": "Say again",
+    "keys": [
+     "say again"
+    ],
+    "wrong": [
+     "Repeat",
+     "Roger"
+    ],
+    "note_pt": "Nunca colaciones o que não percebeste. Pede \"say again\" ou \"say again heading\".",
+    "id": "dubai-arr-04"
+   },
+   {
+    "phase": "Aproximação",
+    "station": "Dubai Approach",
+    "freq": "124.900",
+    "context_pt": "Estabelecido no ILS da 30L.",
+    "atc": "{CS}, contact Dubai Tower 118.750.",
+    "atc_pt": "{CS}, contacte a Torre do Dubai em 118.750.",
+    "readback": "Dubai Tower 118.75, {CS}.",
+    "readback_pt": "Torre do Dubai 118.75, {CS}.",
+    "keys": [
+     "118.75",
+     "{CS}"
+    ],
+    "wrong": [
+     "Switching, {CS}.",
+     "Dubai Tower 118.57, {CS}."
+    ],
+    "note_pt": "Frequência colacionada.",
+    "id": "dubai-arr-05"
+   },
+   {
+    "phase": "Aterragem",
+    "station": "Dubai Tower",
+    "freq": "118.750",
+    "context_pt": "Estás na final da pista 30L.",
+    "atc": "{CS}, runway 30L, cleared to land, wind 320 degrees 10 knots.",
+    "atc_pt": "{CS}, pista 30L, autorizado a aterrar, vento 320 graus 10 nós.",
+    "readback": "Runway 30L, cleared to land, {CS}.",
+    "readback_pt": "Pista 30L, autorizado a aterrar, {CS}.",
+    "keys": [
+     "30L",
+     "cleared to land",
+     "{CS}"
+    ],
+    "wrong": [
+     "Cleared to land, {CS}.",
+     "Runway 30R, cleared to land, {CS}."
+    ],
+    "note_pt": "Pista e autorização de aterragem.",
+    "id": "dubai-arr-06"
+   }
+  ]
+ }
+]

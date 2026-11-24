@@ -1,0 +1,11 @@
+# Test server: `docker compose up -d --build`, then open http://<server-ip>:3000
+services:
+  web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
+        NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY:-}
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
