@@ -4,7 +4,7 @@ import { fillCallsign } from "@/lib/engine/normalize";
 import { choiceOptions, gradeStep, referenceOf, type ClauseResult } from "@/lib/engine/grade";
 import { newCallsign } from "@/lib/engine/callsign";
 import { LEVELS, isCall, isQuiz, type AnswerMode, type Licence, type Simulation, type Step } from "@/lib/engine/types";
-import { ACCENTS } from "@/lib/i18n/dict";
+import { ACCENTS, englishAccent } from "@/lib/i18n/dict";
 import { useI18n } from "@/lib/i18n/provider";
 import { loadProgress, saveResult, type Progress } from "./progress";
 import { useAtcVoice } from "./useAtcVoice";
@@ -58,7 +58,11 @@ export default function Trainer() {
   const [view, setView] = useState<View>("home");
   // the first render only shows "loading", so reading saved preferences here cannot cause a hydration mismatch
   const [licence, setLicence] = useState<Licence>(() => readPrefs().licence ?? "PPL");
-  const [accentPref, setAccentPref] = useState(() => readPrefs().accent ?? "auto");
+  const [accentPref, setAccentPref] = useState(() => {
+    // older saves may hold a non-English accent (e.g. pt-PT), which is no longer offered
+    const a = readPrefs().accent;
+    return a && ACCENTS.some((x) => x.lang === a) ? a : "auto";
+  });
   const [noise, setNoise] = useState<NoiseLevel>(() => readPrefs().noise ?? 0);
   const [deck, setDeck] = useState<Deck>(loadDeck);
   const [stats, setStats] = useState<Stats>(loadStats);
@@ -202,7 +206,7 @@ export default function Trainer() {
           key={`${run.sim.id}-${run.level}-${run.callsign}`}
           run={run}
           setRun={setRun}
-          accentLang={accentPref === "auto" ? run.sim.accent : accentPref}
+          accentLang={englishAccent(accentPref === "auto" ? run.sim.accent : accentPref)}
           voice={voice}
           onFinish={finish}
           onMistake={addMistake}
@@ -231,7 +235,7 @@ export default function Trainer() {
           sims={sims}
           licence={licence}
           voice={voice}
-          accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
+          accentFor={(s) => englishAccent(accentPref === "auto" ? s.accent : accentPref)}
           onMistake={addMistake}
           onFinish={(rec) => track({ kind: "exam", score: rec.score, passed: rec.score >= 75 })}
         />
@@ -243,7 +247,7 @@ export default function Trainer() {
           deck={deck}
           onReviewed={reviewed}
           voice={voice}
-          accentFor={(s) => (accentPref === "auto" ? s.accent : accentPref)}
+          accentFor={(s) => englishAccent(accentPref === "auto" ? s.accent : accentPref)}
         />
       )}
 

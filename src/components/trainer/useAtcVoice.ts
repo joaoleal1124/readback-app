@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toPhrases } from "@/lib/engine/speech";
+import { englishAccent } from "@/lib/i18n/dict";
 import { VOICE_FLOOR, primeAudio, startNoise, stopNoise, type NoiseLevel } from "./radioNoise";
 
 const vlang = (v: SpeechSynthesisVoice) => (v.lang || "").replace("_", "-").toLowerCase();
@@ -16,8 +17,9 @@ function quality(v: SpeechSynthesisVoice) {
   return q;
 }
 
+/** Best English voice for the accent; never returns a non-English voice. */
 export function bestVoice(voices: SpeechSynthesisVoice[], lang: string): SpeechSynthesisVoice | null {
-  const L = lang.toLowerCase();
+  const L = englishAccent(lang).toLowerCase();
   const pre = L.split("-")[0];
   const exact = voices.filter((v) => vlang(v) === L);
   const same = voices.filter((v) => vlang(v) === pre || vlang(v).startsWith(`${pre}-`));
@@ -66,10 +68,9 @@ export function useAtcVoice() {
           u.onend = () => stopNoise(level);
           u.onerror = () => stopNoise(level, false);
         }
-        if (v) {
-          u.voice = v;
-          u.lang = v.lang;
-        } else u.lang = "en-GB";
+        // the text is always English, so the utterance language is always English too
+        u.lang = v ? v.lang.replace("_", "-") : englishAccent(lang);
+        if (v) u.voice = v;
         u.rate = slow ? 0.72 : 0.92;
         synth.speak(u);
       });

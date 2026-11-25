@@ -30,7 +30,7 @@ const pt = {
   error1: "erro",
   errorN: "erros",
   level: "Nível",
-  accentAuto: "Sotaque: o do país",
+  accentAuto: "Sotaque: automático (inglês)",
   accent: "Sotaque",
   noVoice: "sem voz",
   back: "Simulações",
@@ -224,7 +224,7 @@ const en: Dict = {
   error1: "error",
   errorN: "errors",
   level: "Level",
-  accentAuto: "Accent: the country's",
+  accentAuto: "Accent: automatic (English)",
   accent: "Accent",
   noVoice: "no voice",
   back: "Simulations",
@@ -388,15 +388,19 @@ const en: Dict = {
 
 export const DICTS: Record<Lang, Dict> = { pt, en };
 
-/** Accent names shown in the accent picker. */
+/**
+ * Accent names shown in the accent picker. Radio phraseology is English only, so
+ * every accent is an English voice: a non-English voice mispronounces English words.
+ */
 export const ACCENTS: { lang: string; pt: string; en: string }[] = [
-  { lang: "pt-PT", pt: "Português", en: "Portuguese" },
-  { lang: "es-ES", pt: "Espanhol", en: "Spanish" },
-  { lang: "fr-FR", pt: "Francês", en: "French" },
-  { lang: "de-DE", pt: "Alemão", en: "German" },
-  { lang: "it-IT", pt: "Italiano", en: "Italian" },
   { lang: "en-GB", pt: "Britânico", en: "British" },
   { lang: "en-US", pt: "Americano", en: "American" },
   { lang: "en-IN", pt: "Indiano", en: "Indian" },
   { lang: "en-AU", pt: "Australiano", en: "Australian" },
 ];
+
+/** Maps any wanted accent to an English one (non-English falls back to British English). */
+export function englishAccent(lang: string | undefined | null): string {
+  const L = (lang ?? "").replace("_", "-");
+  return /^en(-|$)/i.test(L) ? L : "en-GB";
+}
